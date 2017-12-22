@@ -1,0 +1,1863 @@
+{
+  "meta": {
+    "code": 200,
+    "requestId": "5a27bd14351e3d0a13e67352"
+  },
+  "response": {
+    "venues": [
+      {
+        "id": "5075c495e4b0e8c7ba9b20b5",
+        "name": "DSP Wild Bar",
+        "contact": {},
+        "location": {
+          "address": "31 Rue D'Anvers",
+          "lat": 45.750531947909764,
+          "lng": 4.843720317644323,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.750531947909764,
+              "lng": 4.843720317644323
+            }
+          ],
+          "postalCode": "69007",
+          "cc": "FR",
+          "city": "Lyon",
+          "state": "Rhône-Alpes",
+          "country": "France",
+          "formattedAddress": [
+            "31 Rue D'Anvers",
+            "69007 Lyon",
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "4bf58dd8d48988d116941735",
+            "name": "Bar",
+            "pluralName": "Bars",
+            "shortName": "Bar",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/nightlife/pub_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 13,
+          "usersCount": 12,
+          "tipCount": 0
+        },
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      },
+      {
+        "id": "4bebd16bb3352d7f9bdc56d2",
+        "name": "L'Aristo Bar",
+        "contact": {
+          "phone": "+33478604698",
+          "formattedPhone": "+33 4 78 60 46 98"
+        },
+        "location": {
+          "address": "87 Rue Moncey",
+          "lat": 45.759736893931034,
+          "lng": 4.848114462003145,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.759736893931034,
+              "lng": 4.848114462003145
+            }
+          ],
+          "postalCode": "69003",
+          "cc": "FR",
+          "city": "Lyon",
+          "state": "Rhône-Alpes",
+          "country": "France",
+          "formattedAddress": [
+            "87 Rue Moncey",
+            "69003 Lyon",
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "4bf58dd8d48988d16d941735",
+            "name": "Café",
+            "pluralName": "Cafés",
+            "shortName": "Café",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/food/cafe_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 123,
+          "usersCount": 93,
+          "tipCount": 3
+        },
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      },
+      {
+        "id": "4b6c5f31f964a52091342ce3",
+        "name": "Broc' Bar",
+        "contact": {
+          "phone": "+33478308261",
+          "formattedPhone": "+33 4 78 30 82 61"
+        },
+        "location": {
+          "address": "20 Rue Lanterne",
+          "crossStreet": "Rue de la Platière",
+          "lat": 45.76603724167152,
+          "lng": 4.831843127155859,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.76603724167152,
+              "lng": 4.831843127155859
+            }
+          ],
+          "postalCode": "69001",
+          "cc": "FR",
+          "city": "Lyon",
+          "state": "Rhône-Alpes",
+          "country": "France",
+          "formattedAddress": [
+            "20 Rue Lanterne (Rue de la Platière)",
+            "69001 Lyon",
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "4bf58dd8d48988d116941735",
+            "name": "Bar",
+            "pluralName": "Bars",
+            "shortName": "Bar",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/nightlife/pub_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 1033,
+          "usersCount": 505,
+          "tipCount": 23
+        },
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      },
+      {
+        "id": "577973c0498e81e8ede9da29",
+        "name": "Bar l'AFK",
+        "contact": {},
+        "location": {
+          "address": "52 Rue de l'Université",
+          "lat": 45.748059,
+          "lng": 4.843476,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.748059,
+              "lng": 4.843476
+            }
+          ],
+          "postalCode": "69007",
+          "cc": "FR",
+          "city": "Lyon",
+          "state": "Rhône-Alpes",
+          "country": "France",
+          "formattedAddress": [
+            "52 Rue de l'Université",
+            "69007 Lyon",
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "56aa371ce4b08b9a8d57356c",
+            "name": "Bar à bières",
+            "pluralName": "Bars à bières",
+            "shortName": "Bar à bières",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/nightlife/pub_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 18,
+          "usersCount": 17,
+          "tipCount": 0
+        },
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      },
+      {
+        "id": "5988171e75cb8c79a9f85e66",
+        "name": "Bar",
+        "contact": {},
+        "location": {
+          "lat": 45.747003,
+          "lng": 4.844916,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.747003,
+              "lng": 4.844916
+            }
+          ],
+          "postalCode": "69007",
+          "cc": "FR",
+          "city": "Lyon",
+          "state": "Rhône-Alpes",
+          "country": "France",
+          "formattedAddress": [
+            "69007 Lyon",
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "4bf58dd8d48988d116941735",
+            "name": "Bar",
+            "pluralName": "Bars",
+            "shortName": "Bar",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/nightlife/pub_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 1,
+          "usersCount": 1,
+          "tipCount": 0
+        },
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [
+          {
+            "id": "556e5a1fbd6a82902e292562"
+          }
+        ],
+        "hasPerk": false
+      },
+      {
+        "id": "4ba126d4f964a520b99c37e3",
+        "name": "Matinee Bar",
+        "contact": {
+          "phone": "+33472560606",
+          "formattedPhone": "+33 4 72 56 06 06"
+        },
+        "location": {
+          "address": "2 Rue Bellecordière",
+          "lat": 45.75888582131899,
+          "lng": 4.83609728066543,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.75888582131899,
+              "lng": 4.83609728066543
+            }
+          ],
+          "postalCode": "69002",
+          "cc": "FR",
+          "city": "Lyon",
+          "state": "Rhône-Alpes",
+          "country": "France",
+          "formattedAddress": [
+            "2 Rue Bellecordière",
+            "69002 Lyon",
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "4bf58dd8d48988d116941735",
+            "name": "Bar",
+            "pluralName": "Bars",
+            "shortName": "Bar",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/nightlife/pub_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 114,
+          "usersCount": 51,
+          "tipCount": 0
+        },
+        "url": "http://www.matineebar.net",
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      },
+      {
+        "id": "50045f6ae4b07c8aea49ee80",
+        "name": "bar de la madeleine",
+        "contact": {},
+        "location": {
+          "address": "27 rue de la madeleine",
+          "lat": 45.74750900268555,
+          "lng": 4.848499298095703,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.74750900268555,
+              "lng": 4.848499298095703
+            }
+          ],
+          "cc": "FR",
+          "city": "Lyon",
+          "state": "Rhône-Alpes",
+          "country": "France",
+          "formattedAddress": [
+            "27 rue de la madeleine",
+            "Lyon",
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "4bf58dd8d48988d116941735",
+            "name": "Bar",
+            "pluralName": "Bars",
+            "shortName": "Bar",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/nightlife/pub_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 17,
+          "usersCount": 14,
+          "tipCount": 0
+        },
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      },
+      {
+        "id": "5771a860498e0417c9447f8b",
+        "name": "Bar et restaurant de la voute",
+        "contact": {},
+        "location": {
+          "address": "10 Rue de la Madeleine",
+          "lat": 45.750482,
+          "lng": 4.847937,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.750482,
+              "lng": 4.847937
+            }
+          ],
+          "postalCode": "69007",
+          "cc": "FR",
+          "city": "Lyon",
+          "state": "Rhône-Alpes",
+          "country": "France",
+          "formattedAddress": [
+            "10 Rue de la Madeleine",
+            "69007 Lyon",
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "56aa371ce4b08b9a8d57356c",
+            "name": "Bar à bières",
+            "pluralName": "Bars à bières",
+            "shortName": "Bar à bières",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/nightlife/pub_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 1,
+          "usersCount": 1,
+          "tipCount": 0
+        },
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      },
+      {
+        "id": "52d674e5498e33cb430f6fdd",
+        "name": "Bar-Restaurant Le Bossuet",
+        "contact": {
+          "phone": "+33472370015",
+          "formattedPhone": "+33 4 72 37 00 15",
+          "facebook": "251730101597485",
+          "facebookName": "Le Bossuet Restaurant"
+        },
+        "location": {
+          "address": "6 rue Bossuet",
+          "lat": 45.76777529651331,
+          "lng": 4.854108134990777,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.76777529651331,
+              "lng": 4.854108134990777
+            }
+          ],
+          "postalCode": "69006",
+          "cc": "FR",
+          "city": "Lyon",
+          "state": "Rhône-Alpes",
+          "country": "France",
+          "formattedAddress": [
+            "6 rue Bossuet",
+            "69006 Lyon",
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "4bf58dd8d48988d147941735",
+            "name": "Diner",
+            "pluralName": "Diner",
+            "shortName": "Diner",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/food/diner_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 4,
+          "usersCount": 2,
+          "tipCount": 0
+        },
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      },
+      {
+        "id": "5898aaa47ff1e43860a2f87a",
+        "name": "L ' Allibi Bar",
+        "contact": {},
+        "location": {
+          "address": "13. Quai Romain Rolland Lyon",
+          "lat": 45.764083,
+          "lng": 4.82909,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.764083,
+              "lng": 4.82909
+            }
+          ],
+          "cc": "FR",
+          "city": "Lyon",
+          "state": "Rhône-Alpes",
+          "country": "France",
+          "formattedAddress": [
+            "13. Quai Romain Rolland Lyon",
+            "Lyon",
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "4bf58dd8d48988d116941735",
+            "name": "Bar",
+            "pluralName": "Bars",
+            "shortName": "Bar",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/nightlife/pub_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 0,
+          "usersCount": 0,
+          "tipCount": 0
+        },
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      },
+      {
+        "id": "4d91a6d3f5388cfa7b50b93d",
+        "name": "Bar Expertise",
+        "contact": {},
+        "location": {
+          "address": "56 Rue Chevreul",
+          "lat": 45.74596555000001,
+          "lng": 4.8416656,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.74596555000001,
+              "lng": 4.8416656
+            }
+          ],
+          "postalCode": "69007",
+          "cc": "FR",
+          "city": "Lyon",
+          "state": "Rhône-Alpes",
+          "country": "France",
+          "formattedAddress": [
+            "56 Rue Chevreul",
+            "69007 Lyon",
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "4bf58dd8d48988d171941735",
+            "name": "Salle polyvalente",
+            "pluralName": "Salles polyvalentes",
+            "shortName": "Salle polyvalente",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/building/eventspace_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 5,
+          "usersCount": 4,
+          "tipCount": 0
+        },
+        "venueRatingBlacklisted": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      },
+      {
+        "id": "5239b0e911d24b6f258bae0a",
+        "name": "Bar Mostaganen",
+        "contact": {},
+        "location": {
+          "lat": 45.75129318237305,
+          "lng": 4.842156410217285,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.75129318237305,
+              "lng": 4.842156410217285
+            }
+          ],
+          "cc": "FR",
+          "country": "France",
+          "formattedAddress": [
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "4bf58dd8d48988d16d941735",
+            "name": "Café",
+            "pluralName": "Cafés",
+            "shortName": "Café",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/food/cafe_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 1,
+          "usersCount": 1,
+          "tipCount": 0
+        },
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      },
+      {
+        "id": "4bda805d3904a593e1a9469e",
+        "name": "Bar De La Radio",
+        "contact": {},
+        "location": {
+          "address": "49 cours gambetta",
+          "lat": 45.75363449434932,
+          "lng": 4.847777767322624,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.75363449434932,
+              "lng": 4.847777767322624
+            }
+          ],
+          "postalCode": "69003",
+          "cc": "FR",
+          "city": "Lyon",
+          "state": "Rhône-Alpes",
+          "country": "France",
+          "formattedAddress": [
+            "49 cours gambetta",
+            "69003 Lyon",
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "4bf58dd8d48988d116941735",
+            "name": "Bar",
+            "pluralName": "Bars",
+            "shortName": "Bar",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/nightlife/pub_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 30,
+          "usersCount": 15,
+          "tipCount": 0
+        },
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      },
+      {
+        "id": "4e81b6515c5c305b36db9374",
+        "name": "Le Satellit' Bar",
+        "contact": {},
+        "location": {
+          "lat": 45.745799,
+          "lng": 4.849196,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.745799,
+              "lng": 4.849196
+            }
+          ],
+          "cc": "FR",
+          "country": "France",
+          "formattedAddress": [
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "4bf58dd8d48988d147941735",
+            "name": "Diner",
+            "pluralName": "Diner",
+            "shortName": "Diner",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/food/diner_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 7,
+          "usersCount": 5,
+          "tipCount": 0
+        },
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      },
+      {
+        "id": "4fe343db4fc6c1742697f32d",
+        "name": "Bar des Oliviers",
+        "contact": {},
+        "location": {
+          "address": "27 rue Chevreul",
+          "crossStreet": "au coin de la rue bechevelin",
+          "lat": 45.749026614435046,
+          "lng": 4.8390913009643555,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.749026614435046,
+              "lng": 4.8390913009643555
+            }
+          ],
+          "postalCode": "69007",
+          "cc": "FR",
+          "city": "Lyon",
+          "state": "Rhône-Alpes",
+          "country": "France",
+          "formattedAddress": [
+            "27 rue Chevreul (au coin de la rue bechevelin)",
+            "69007 Lyon",
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "4bf58dd8d48988d11b941735",
+            "name": "Pub",
+            "pluralName": "Pubs",
+            "shortName": "Pub",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/nightlife/pub_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 11,
+          "usersCount": 10,
+          "tipCount": 1
+        },
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      },
+      {
+        "id": "53235eeb498e9fe3fda92af3",
+        "name": "Le Jean Macé bar",
+        "contact": {},
+        "location": {
+          "lat": 45.747841412704865,
+          "lng": 4.841838079928867,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.747841412704865,
+              "lng": 4.841838079928867
+            }
+          ],
+          "cc": "FR",
+          "country": "France",
+          "formattedAddress": [
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "4bf58dd8d48988d147941735",
+            "name": "Diner",
+            "pluralName": "Diner",
+            "shortName": "Diner",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/food/diner_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 7,
+          "usersCount": 6,
+          "tipCount": 2
+        },
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      },
+      {
+        "id": "4e2e7a57b61c88c3a78decc7",
+        "name": "Bar le Creuzet",
+        "contact": {},
+        "location": {
+          "address": "18 Avenue Félix Faure",
+          "lat": 45.75242029219472,
+          "lng": 4.850551812401477,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.75242029219472,
+              "lng": 4.850551812401477
+            }
+          ],
+          "postalCode": "69007",
+          "cc": "FR",
+          "city": "Lyon",
+          "state": "Rhône-Alpes",
+          "country": "France",
+          "formattedAddress": [
+            "18 Avenue Félix Faure",
+            "69007 Lyon",
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "4bf58dd8d48988d116941735",
+            "name": "Bar",
+            "pluralName": "Bars",
+            "shortName": "Bar",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/nightlife/pub_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 66,
+          "usersCount": 18,
+          "tipCount": 0
+        },
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      },
+      {
+        "id": "596fb26c58aa7f5042e56487",
+        "name": "Young Lust Bar",
+        "contact": {},
+        "location": {
+          "address": "44 rue Salomon Reinach",
+          "lat": 45.750862,
+          "lng": 4.8423753,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.750862,
+              "lng": 4.8423753
+            }
+          ],
+          "postalCode": "69007",
+          "cc": "FR",
+          "city": "Lyon",
+          "state": "Rhône-Alpes",
+          "country": "France",
+          "formattedAddress": [
+            "44 rue Salomon Reinach",
+            "69007 Lyon",
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "4bf58dd8d48988d116941735",
+            "name": "Bar",
+            "pluralName": "Bars",
+            "shortName": "Bar",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/nightlife/pub_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 0,
+          "usersCount": 0,
+          "tipCount": 0
+        },
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      },
+      {
+        "id": "4fe83ad1e4b0faa0b9f76367",
+        "name": "Salade Bar'",
+        "contact": {},
+        "location": {
+          "address": "13 Place Jean Macé",
+          "lat": 45.746097564697266,
+          "lng": 4.841259002685547,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.746097564697266,
+              "lng": 4.841259002685547
+            }
+          ],
+          "postalCode": "69007",
+          "cc": "FR",
+          "city": "Lyon",
+          "state": "Rhône-Alpes",
+          "country": "France",
+          "formattedAddress": [
+            "13 Place Jean Macé",
+            "69007 Lyon",
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "4bf58dd8d48988d1bd941735",
+            "name": "Bar à salades",
+            "pluralName": "Bars à salades",
+            "shortName": "Salade",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/food/salad_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 11,
+          "usersCount": 2,
+          "tipCount": 0
+        },
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      },
+      {
+        "id": "4f1d4c34e4b0b4fdeb26c710",
+        "name": "Bar Tabac Pmu",
+        "contact": {},
+        "location": {
+          "address": "Avenue Berthelot",
+          "lat": 45.74212842268766,
+          "lng": 4.851664205610206,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.74212842268766,
+              "lng": 4.851664205610206
+            }
+          ],
+          "postalCode": "69007",
+          "cc": "FR",
+          "city": "Lyon",
+          "state": "Rhône-Alpes",
+          "country": "France",
+          "formattedAddress": [
+            "Avenue Berthelot",
+            "69007 Lyon",
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "4bf58dd8d48988d123951735",
+            "name": "Tabac",
+            "pluralName": "Tabacs",
+            "shortName": "Tabac",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/tobacco_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 7,
+          "usersCount": 3,
+          "tipCount": 0
+        },
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      },
+      {
+        "id": "4d331425c75a6ea835df13ae",
+        "name": "Wash Bar",
+        "contact": {},
+        "location": {
+          "address": "Rue Garibaldi",
+          "crossStreet": "Rue de la Madeleine",
+          "lat": 45.750828,
+          "lng": 4.853468,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.750828,
+              "lng": 4.853468
+            }
+          ],
+          "postalCode": "69007",
+          "cc": "FR",
+          "city": "Lyon",
+          "state": "Rhône-Alpes",
+          "country": "France",
+          "formattedAddress": [
+            "Rue Garibaldi (Rue de la Madeleine)",
+            "69007 Lyon",
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "4bf58dd8d48988d1fc941735",
+            "name": "Blanchisserie",
+            "pluralName": "Blanchisseries",
+            "shortName": "Laverie",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/laundry_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 2,
+          "usersCount": 2,
+          "tipCount": 0
+        },
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      },
+      {
+        "id": "4f75ed03e4b0f1780ab27058",
+        "name": "Cez Bar",
+        "contact": {},
+        "location": {
+          "lat": 45.74891009846218,
+          "lng": 4.854966790806929,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.74891009846218,
+              "lng": 4.854966790806929
+            }
+          ],
+          "cc": "FR",
+          "country": "France",
+          "formattedAddress": [
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "4bf58dd8d48988d116941735",
+            "name": "Bar",
+            "pluralName": "Bars",
+            "shortName": "Bar",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/nightlife/pub_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 16,
+          "usersCount": 8,
+          "tipCount": 0
+        },
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      },
+      {
+        "id": "512f8adae4b0a50f8ba0d6e4",
+        "name": "Bar à chicha",
+        "contact": {},
+        "location": {
+          "lat": 45.758144242915165,
+          "lng": 4.834187490088368,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.758144242915165,
+              "lng": 4.834187490088368
+            }
+          ],
+          "cc": "FR",
+          "country": "France",
+          "formattedAddress": [
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "4bf58dd8d48988d115951735",
+            "name": "Atelier à vélos",
+            "pluralName": "Ateliers à vélos",
+            "shortName": "Atelier à vélos",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/bikeshop_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 6,
+          "usersCount": 6,
+          "tipCount": 0
+        },
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      },
+      {
+        "id": "4b5ad343f964a5204dd628e3",
+        "name": "Bar le fer à Cheval",
+        "contact": {},
+        "location": {
+          "lat": 45.762964,
+          "lng": 4.850767,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.762964,
+              "lng": 4.850767
+            }
+          ],
+          "cc": "FR",
+          "city": "Lyon",
+          "state": "Rhône-Alpes",
+          "country": "France",
+          "formattedAddress": [
+            "Lyon",
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "4bf58dd8d48988d116941735",
+            "name": "Bar",
+            "pluralName": "Bars",
+            "shortName": "Bar",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/nightlife/pub_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 96,
+          "usersCount": 45,
+          "tipCount": 1
+        },
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      },
+      {
+        "id": "4fd21577e4b0856361797124",
+        "name": "Bar St-Vincent",
+        "contact": {},
+        "location": {
+          "lat": 45.759999,
+          "lng": 4.849062,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.759999,
+              "lng": 4.849062
+            }
+          ],
+          "cc": "FR",
+          "country": "France",
+          "formattedAddress": [
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "4bf58dd8d48988d11d941735",
+            "name": "Café des sports",
+            "pluralName": "Cafés des sports",
+            "shortName": "Café des sports",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/nightlife/sportsbar_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 13,
+          "usersCount": 5,
+          "tipCount": 0
+        },
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      },
+      {
+        "id": "5084eafae4b091f16bac83d3",
+        "name": "Bar Vjc",
+        "contact": {},
+        "location": {
+          "lat": 45.747066895944286,
+          "lng": 4.867487331542455,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.747066895944286,
+              "lng": 4.867487331542455
+            }
+          ],
+          "cc": "FR",
+          "country": "France",
+          "formattedAddress": [
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "4bf58dd8d48988d147941735",
+            "name": "Diner",
+            "pluralName": "Diner",
+            "shortName": "Diner",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/food/diner_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 4,
+          "usersCount": 3,
+          "tipCount": 0
+        },
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      },
+      {
+        "id": "4f7cd170e4b0a6ed168e970e",
+        "name": "Bar/Tabac Le Bulldog",
+        "contact": {},
+        "location": {
+          "address": "58 Grande Rue de la Croix-Rousse, 69004 Lyon",
+          "lat": 45.763215683105074,
+          "lng": 4.855513876897942,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.763215683105074,
+              "lng": 4.855513876897942
+            }
+          ],
+          "postalCode": "69004",
+          "cc": "FR",
+          "city": "Lyon",
+          "state": "Rhône-Alpes",
+          "country": "France",
+          "formattedAddress": [
+            "58 Grande Rue de la Croix-Rousse, 69004 Lyon",
+            "69004 Lyon",
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "4bf58dd8d48988d123951735",
+            "name": "Tabac",
+            "pluralName": "Tabacs",
+            "shortName": "Tabac",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/tobacco_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 8,
+          "usersCount": 5,
+          "tipCount": 0
+        },
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      },
+      {
+        "id": "51a60ef9e4b0b30137a4d0f2",
+        "name": "Bar La Linotte",
+        "contact": {},
+        "location": {
+          "lat": 45.754607027667895,
+          "lng": 4.830865234088471,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.754607027667895,
+              "lng": 4.830865234088471
+            }
+          ],
+          "cc": "FR",
+          "country": "France",
+          "formattedAddress": [
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "4bf58dd8d48988d121941735",
+            "name": "Bar lounge",
+            "pluralName": "Bars lounge",
+            "shortName": "Bar lounge",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/nightlife/default_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 5,
+          "usersCount": 4,
+          "tipCount": 0
+        },
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      },
+      {
+        "id": "4faab8d6e4b08e11562ee9ae",
+        "name": "Win bar",
+        "contact": {},
+        "location": {
+          "lat": 45.757359,
+          "lng": 4.847267,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.757359,
+              "lng": 4.847267
+            }
+          ],
+          "cc": "FR",
+          "country": "France",
+          "formattedAddress": [
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "4bf58dd8d48988d116941735",
+            "name": "Bar",
+            "pluralName": "Bars",
+            "shortName": "Bar",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/nightlife/pub_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 1,
+          "usersCount": 1,
+          "tipCount": 0
+        },
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      },
+      {
+        "id": "4bf92b4ab182c9b6bb7c785a",
+        "name": "Café Bar de la Ficelle",
+        "contact": {},
+        "location": {
+          "address": "2 avenue du doyenné",
+          "lat": 45.760153058163255,
+          "lng": 4.8267654036893095,
+          "labeledLatLngs": [
+            {
+              "label": "display",
+              "lat": 45.760153058163255,
+              "lng": 4.8267654036893095
+            }
+          ],
+          "postalCode": "69005",
+          "cc": "FR",
+          "city": "Lyon",
+          "state": "Rhône-Alpes",
+          "country": "France",
+          "formattedAddress": [
+            "2 avenue du doyenné",
+            "69005 Lyon",
+            "France"
+          ]
+        },
+        "categories": [
+          {
+            "id": "4bf58dd8d48988d16d941735",
+            "name": "Café",
+            "pluralName": "Cafés",
+            "shortName": "Café",
+            "icon": {
+              "prefix": "https://ss3.4sqi.net/img/categories_v2/food/cafe_",
+              "suffix": ".png"
+            },
+            "primary": true
+          }
+        ],
+        "verified": false,
+        "stats": {
+          "checkinsCount": 239,
+          "usersCount": 200,
+          "tipCount": 5
+        },
+        "allowMenuUrlEdit": true,
+        "beenHere": {
+          "lastCheckinExpiredAt": 0
+        },
+        "specials": {
+          "count": 0,
+          "items": []
+        },
+        "hereNow": {
+          "count": 0,
+          "summary": "Personne ici",
+          "groups": []
+        },
+        "referralId": "v-1512553748",
+        "venueChains": [],
+        "hasPerk": false
+      }
+    ],
+    "geocode": {
+      "what": "",
+      "where": "lyon",
+      "feature": {
+        "cc": "FR",
+        "name": "Lyon",
+        "displayName": "Lyon, France",
+        "matchedName": "Lyon, France",
+        "highlightedName": "<b>Lyon</b>, France",
+        "woeType": 7,
+        "slug": "lyon-france",
+        "id": "geonameid:2996944",
+        "longId": "72057594040924880",
+        "geometry": {
+          "center": {
+            "lat": 45.74846,
+            "lng": 4.84671
+          },
+          "bounds": {
+            "ne": {
+              "lat": 45.8562819999987,
+              "lng": 5.062040967293937
+            },
+            "sw": {
+              "lat": 45.55387711735426,
+              "lng": 4.6963040042653965
+            }
+          }
+        }
+      },
+      "parents": []
+    }
+  }
+}

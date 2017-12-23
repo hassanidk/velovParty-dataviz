@@ -1,0 +1,18 @@
+{
+	"nbJours": 7,
+	"pasHeuresJours": 1,
+	"records": [{
+			"station_id": "ID_STATION_1",
+			"etat": [{
+				"JOUR_1_heure1": 60},{
+				"JOUR_1_heure2": 80
+			}]
+		},
+		{
+			"station_id": "ID_STATION_2",
+			"etat": [{
+				"JOUR_1_heure1": 50},{
+				"JOUR_1_heure2": 60
+			}]
+		}
+	]

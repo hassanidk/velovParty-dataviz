@@ -52,9 +52,8 @@ html, body{
         center: new google.maps.LatLng(48.117266, -1.677793),
         mapTypeId: google.maps.MapTypeId.ROADMAP
     });
-  var allMarkers = []
+var allMarkers = []
 var rectangle = null;
-
 /*
  * use google maps api built-in mechanism to attach dom events
  */
@@ -130,6 +129,7 @@ var rectangle = null;
 
     var myLatLng = {lat : records[i].geometry.coordinates[1] , lng: records[i].geometry.coordinates[0]};
     var marker = new google.maps.Marker({
+      id : i,
       position : myLatLng,
       map : map,
       title : records[i].fields.nom
@@ -171,8 +171,13 @@ google.maps.event.addDomListener(window, "load", function () {
             console.log(bounds);
             for (var i =0; i< allMarkers.length;i++){
               if (bounds.contains(allMarkers[i].getPosition())){
-                console.log(allMarkers[i].title)
                 // TODO ANTHONY FAINEANT
+// Je t'aide un peu pour l'intégration, tu as le choix. Soit t'utilise l'id et appelle ta fonction pour chaque ID
+// Soit tu cree une liste, puis tu fais passer ta liste dans ta fonction
+// Je suis gentil ton intégration va se faire sans souci, j'ai aucun svg, par contre tu l'affecte à la div mapSide
+// Enjoy (ET supprime ces commentaires après ;))
+                console.log(allMarkers[i].id)
+    
               }
             }
             drawingManager.setDrawingMode(null);

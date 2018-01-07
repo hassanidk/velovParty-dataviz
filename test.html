@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <style>
@@ -13,24 +13,20 @@ html, body{
   width:80%;
   height:100%;
 }
-
 #mapSide{
   float:left;
   width:20%;
   height:100%;s
 }
-
 .stations, .stations svg {
   position: absolute;
 }
-
 .stations svg {
   width: 60px;
   height: 20px;
   padding-right: 100px;
   font: 10px sans-serif;
 }
-
 .stations circle {
   fill: brown;
   stroke: black;
@@ -45,8 +41,6 @@ html, body{
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
     // Create the Google Map…
-
-
     var map = new google.maps.Map(d3.select("#mapCanvas").node(), {
         zoom: 12,
         center: new google.maps.LatLng(48.117266, -1.677793),
@@ -57,14 +51,11 @@ var rectangle = null;
 /*
  * use google maps api built-in mechanism to attach dom events
  */
-
     var projection = d3.geoAlbers();
-
     var path = d3.geoPath()
         .projection(projection);
-
     d3.json("rennes.json", function(json) {
-        var boundaries = boundariesRennes(json.geometries[0].coordinates[0][0])
+        var boundaries= boundariesRennes(json.geometries[0].coordinates[0][0])
         var boundariesPath = new google.maps.Polyline({
             path: boundaries,
             geodesic: true,
@@ -72,27 +63,37 @@ var rectangle = null;
             strokeOpacity: 1.0,
             strokeWeight: 2
         });
-
         boundariesPath.setMap(map);
-
-
     });
-  
+
+    d3.json("parking.json", function(json) {
+        for (var i=0; json.features.features.length; i++) {
+          var coordonnees=json.features.features[i].geometry.coordinates;
+          var name=json.parks[i].parkInformation.name;
+          console.log(coordonnees[0])
+          var marker = new google.maps.Marker({
+          position: {lat: coordonnees[0], lng:coordonnees[1]},
+          icon: 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png',
+          map: map
+        });
+     //  boundariesPath.setMap(map);
+        };
+    });
+
+
+    
   d3.json("https://data.rennesmetropole.fr/api/records/1.0/search/?rows=100&dataset=etat-des-stations-le-velo-star-en-temps-reel&facet=nom&facet=etat&facet=nombreemplacementsactuels&facet=nombreemplacementsdisponibles&facet=nombrevelosdisponibles", function(json){
   /* Methode D3 JS    
   var overlay = new google.maps.OverlayView();
-
   // Add the container when the overlay is added to the map.
   overlay.onAdd = function() {
     var layer = d3.select(this.getPanes().overlayLayer).append("div")
         .attr("class", "stations");
-
     // Draw each marker as a separate SVG element.
     // We could use a single SVG, but what size would it have?
     overlay.draw = function() {
       var projection = this.getProjection(),
           padding = 10;
-
       var marker = layer.selectAll("svg")
           .data(json.records)
           .each(transform) // update existing markers
@@ -126,7 +127,6 @@ var rectangle = null;
 // Methode Google MAP
   var records = json.records;
   for (var i = 0; i< records.length; i++){
-
     var myLatLng = {lat : records[i].geometry.coordinates[1] , lng: records[i].geometry.coordinates[0]};
     var marker = new google.maps.Marker({
       id : i,
@@ -136,12 +136,8 @@ var rectangle = null;
     });
     allMarkers.push(marker)
   }
-
-
-
 });
 google.maps.event.addDomListener(window, "load", function () {
-
     
     
     var drawingManager = new google.maps.drawing.DrawingManager({
@@ -196,12 +192,8 @@ google.maps.event.addDomListener(window, "load", function () {
             rectangle.setMap(null);
     });
 });
-
  
 console.log(allMarkers)
-
-
-
     function boundariesRennes(data) {
         var resultArray = [];
         for (var i = 0; i < data.length; i++) {

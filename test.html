@@ -72,8 +72,10 @@ div.legende {
 
 <div id="mapCanvas"></div>
 <div id="mapSide"></div>
-<script src="//maps.google.com/maps/api/js?sensor=true"></script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=drawing"></script>
+
+<script src="//maps.google.com/maps/api/js?key=AIzaSyCpIkmOcSjVyT8EoDR5m6mTVUAA-s3yHio&sensor=true"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpIkmOcSjVyT8EoDR5m6mTVUAA-s3yHio&v=3.exp&sensor=false&libraries=drawing"></script>
+
 <script>
     // Create the Google Map…
     var map = new google.maps.Map(d3.select("#mapCanvas").node(), {
@@ -185,7 +187,7 @@ var IDS = [];
     var projection = d3.geoAlbers();
     var path = d3.geoPath()
         .projection(projection);
-    d3.json("rennes.json", function(json) {
+    d3.json("data/rennes.json", function(json) {
         var boundaries= boundariesRennes(json.geometries[0].coordinates[0][0])
         var boundariesPath = new google.maps.Polyline({
             path: boundaries,
@@ -197,6 +199,7 @@ var IDS = [];
         boundariesPath.setMap(map);
     });
 
+<<<<<<< HEAD
     d3.json("https://data.rennesmetropole.fr/api/records/1.0/search/?dataset=export-api-parking-citedia", function(json) {
     	console.log(json.records.length)
         for (var i=0; json.records.length; i++) {

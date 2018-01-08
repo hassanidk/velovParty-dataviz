@@ -187,7 +187,7 @@ var IDS = [];
     var projection = d3.geoAlbers();
     var path = d3.geoPath()
         .projection(projection);
-    d3.json("rennes.json", function(json) {
+    d3.json("data/rennes.json", function(json) {
         var boundaries= boundariesRennes(json.geometries[0].coordinates[0][0])
         var boundariesPath = new google.maps.Polyline({
             path: boundaries,
@@ -199,7 +199,7 @@ var IDS = [];
         boundariesPath.setMap(map);
     });
 
-    d3.json("parking.json", function(json) {
+    d3.json("data/parking.json", function(json) {
         for (var i=0; json.features.features.length; i++) {
           var coordonnees=json.features.features[i].geometry.coordinates;
           var name=json.parks[i].parkInformation.name;

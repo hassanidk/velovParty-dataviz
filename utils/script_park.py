@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
 Éditeur de Spyder
 
@@ -8,14 +8,14 @@ Ceci est un script temporaire.
 import json
 import requests
 from datetime import datetime
-#from apscheduler.schedulers.blocking import BlockingScheduler
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 
-uri = "http://data.citedia.com/r1/parks/"
+uri2 = "http://data.citedia.com/r1/parks/"
 sub_data = {}
 
 
-req = requests.get(uri, headers={'content-type': 'application/json'})
+req = requests.get(uri2, headers={'content-type': 'application/json'})
 data = req.json()
 #print(data)
 parks = data['parks']
@@ -25,17 +25,17 @@ sub_data['nbJours'] = 7
 sub_data['nbPasHeures']  = 1
 sub_data['parks'] = []
 for i in range (0, len(parks)):
-    ide=parks[i]['id']
+    ide=100+i
     name = parks[i]['parkInformation']['name']
     status = parks[i]['parkInformation']['status']
     max_park = parks[i]['parkInformation']['max']
     free=parks[i]['parkInformation']['free']
+    taux_remplissage = 0.0
+    if status == "AVAILABLE":
+        taux_remplissage = round(free / max_park * 100, 0)
     sub_data['parks'].append({'ide' : ide, 'name' : name, 'status' : status,'max' : max_park,'free' : free})
 
-#	taux_remplissage = 0.0
-#	if etat == "En fonctionnement":
-#		taux_remplissage = round(fields['nombrevelosdisponibles'] / fields['nombreemplacementsactuels'] * 100, 0)
-#	print(taux_remplissage)
+    
 #	sub_data['records'].append({'station_id' : id_station, 'nom' : nom, 'etat': [{date_time : taux_remplissage}]})
 #	with open("historic.json", "w") as outfile:
 #			json.dump(sub_data, outfile)

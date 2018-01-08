@@ -60,7 +60,7 @@ def majFile():
 
 	reqPark = requests.get(uriPark, headers={'content-type': 'application/json'})
 	dataPark = reqPark.json()
-	parks = dataPark['parks']
+	parks = dataPark['records']
 
 	print("MAJ FILE")
 	print(datetime.now())
@@ -84,14 +84,14 @@ def majFile():
 	j = 0
 	print(len(records))
 	for i in range (len(records) , 	len(sub_data['records']) - 1):
-		ide = 100+i
-		name = parks[j]['parkInformation']['name']
-		status = parks[j]['parkInformation']['status']
-		max_park = parks[j]['parkInformation']['max']
-		free=parks[j]['parkInformation']['free']
+		ide = 100 + i
+		fields = parks[i]['fields']
+		status = fields['status']
+		name=fields['key']
+		max_park = fields['max']
+		free=fields['free']
 		taux_remplissage = 0.0
-
-		if status == "AVAILABLE":
+		if status == "OUVERT":
 			taux_remplissage = round(free / max_park * 100, 0)
 		
 		sub_data['records'][i]['etat'].append({date_time : taux_remplissage})
@@ -101,9 +101,8 @@ def majFile():
 
 if __name__ == "__main__":
 	sched = BlockingScheduler()
-	sched.add_job(createFile, 'cron', month=1, day=8, hour=12, minute=0, second=0)
-	sched.add_job(majFile, 'interval', hours=1, start_date="2018-01-08 13:00:00", end_date="2018-02-01 00:00:00")
+	sched.add_job(createFile, 'cron', month=1, day=8, hour=14, minute=0, second=0)
+	sched.add_job(majFile, 'interval', hours=1, start_date="2018-01-08 15:00:00", end_date="2018-02-01 00:00:00")
 	print("DEBUT JOB")
 	print(datetime.now())
 	sched.start()
-

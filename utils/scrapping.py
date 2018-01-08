@@ -45,9 +45,6 @@ def createFile():
 		taux_remplissage = 0.0
 		if status == "OUVERT":
 			taux_remplissage = round(free / max_park * 100, 0)
-		print(status)
-		print(ide)
-		print(taux_remplissage)
 		sub_data['records'].append({'station_id' : ide, 'nom' : name, 'etat': [{date_time : taux_remplissage}]})
 		with open("historic.json", "w") as outfile:
 			json.dump(sub_data, outfile)
@@ -82,10 +79,10 @@ def majFile():
 				json.dump(sub_data, outfile)
 
 	j = 0
-	print(len(records))
-	for i in range (len(records) , 	len(sub_data['records']) - 1):
+
+	for i in range (len(records) , 	len(sub_data['records'])):	
 		ide = 100 + i
-		fields = parks[i]['fields']
+		fields = parks[j]['fields']
 		status = fields['status']
 		name=fields['key']
 		max_park = fields['max']
@@ -101,8 +98,8 @@ def majFile():
 
 if __name__ == "__main__":
 	sched = BlockingScheduler()
-	sched.add_job(createFile, 'cron', month=1, day=8, hour=14, minute=0, second=0)
-	sched.add_job(majFile, 'interval', hours=1, start_date="2018-01-08 15:00:00", end_date="2018-02-01 00:00:00")
+	sched.add_job(createFile, 'cron', month=1, day=8, hour=17, minute=0, second=0)
+	sched.add_job(majFile, 'interval', hours=1, start_date="2018-01-08 18:00:00", end_date="2018-02-01 00:00:00")
 	print("DEBUT JOB")
 	print(datetime.now())
 	sched.start()

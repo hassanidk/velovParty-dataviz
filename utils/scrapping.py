@@ -6,7 +6,7 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 
 
 uri = "https://data.rennesmetropole.fr/api/records/1.0/search/?rows=100&dataset=etat-des-stations-le-velo-star-en-temps-reel&facet=nom&facet=etat&facet=nombreemplacementsactuels&facet=nombreemplacementsdisponibles&facet=nombrevelosdisponibles"
-uriPark = "http://data.citedia.com/r1/parks/"
+uriPark = "https://data.rennesmetropole.fr/api/records/1.0/search/?dataset=export-api-parking-citedia"
 sub_data = {}
 
 def createFile():
@@ -16,7 +16,7 @@ def createFile():
 	dataPark = reqPark.json()
 
 	records = data['records']
-	parks = dataPark['parks']
+	parks = dataPark['records']
 	print("CREATE FILE")
 	print(datetime.now())
 	sub_data['nbJours'] = 7
@@ -37,13 +37,17 @@ def createFile():
 
 	for i in range (0, len(parks)):
 		ide = 100 + i
-		name = parks[i]['parkInformation']['name']
-		status = parks[i]['parkInformation']['status']
-		max_park = parks[i]['parkInformation']['max']
-		free=parks[i]['parkInformation']['free']
+		fields = parks[i]['fields']
+		status = fields['status']
+		name=fields['key']
+		max_park = fields['max']
+		free=fields['free']
 		taux_remplissage = 0.0
-		if status == "AVAILABLE":
+		if status == "OUVERT":
 			taux_remplissage = round(free / max_park * 100, 0)
+		print(status)
+		print(ide)
+		print(taux_remplissage)
 		sub_data['records'].append({'station_id' : ide, 'nom' : name, 'etat': [{date_time : taux_remplissage}]})
 		with open("historic.json", "w") as outfile:
 			json.dump(sub_data, outfile)

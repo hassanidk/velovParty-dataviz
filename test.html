@@ -1,6 +1,8 @@
 ﻿<!DOCTYPE html>
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<script src="https://d3js.org/d3.v4.min.js"></script>
 <style>
 html, body{
   width:100%;
@@ -10,12 +12,12 @@ html, body{
 }
 #mapCanvas{
   float:left;
-  width:80%;
+  width:65%;
   height:100%;
 }
 #mapSide{
   float:left;
-  width:20%;
+  width:35%;
   height:100%;s
 }
 .stations, .stations svg {
@@ -32,13 +34,46 @@ html, body{
   stroke: black;
   stroke-width: 1.5px;
 }
+.line {
+  fill: none;
+  stroke: black;
+  stroke-width: 2.5px;
+  opacity : 0.7;
+}
+
+circle {
+  fill : grey;
+  stroke : black;
+  opacity: 0.1;
+}
+
+verticalLine {
+}
+
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  padding: 2px;	
+  font: 12px sans-serif;
+  border-radius: 1px;
+  background-color: grey;
+  width: 150px;
+  height: 120px; 
+}
+
+div.legende {
+  width: 100px;
+  height: 100px;
+  font: 12px sans-serif;
+  position: absolute;
+}
 </style>
+</head>
 
 <div id="mapCanvas"></div>
 <div id="mapSide"></div>
 <script src="//maps.google.com/maps/api/js?sensor=true"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=drawing"></script>
-<script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
     // Create the Google Map…
     var map = new google.maps.Map(d3.select("#mapCanvas").node(), {
@@ -48,6 +83,102 @@ html, body{
     });
 var allMarkers = []
 var rectangle = null;
+var IDS = [];
+
+//------
+    var svg = d3.select("#mapSide").append("svg")
+      .attr("width", 960)
+      .attr("height", 500);
+
+    var width = 600;
+    var height = 400;
+    var colors = ["blue","red","green","yellow","brown","purple","grey","pink"]
+    var curseur = 0;
+	var shift = 200;
+
+    var parseHour = d3.timeParse("%H:%M");
+    var displayHour = d3.timeFormat("%H:%M");
+    var onlyHour = d3.timeFormat("%H");
+    
+    //PARAMETRES A CHANGER POUR FAIRE VARIER !
+    var d = new Date("Thu Jan 02 2018 03:00:00 GMT+0100");
+    //IDS = [1,2,3,4,5];
+    
+    
+    var hours = d.getHours();
+    var minute = d.getMinutes() * 100 / 3 / 60;
+    var centralHour = hours;
+    var minhour = new Date(d);
+    var maxhour = new Date(d);
+    
+    minhour.setHours(centralHour-12);
+    maxhour.setHours(centralHour+12);
+    /*console.log("minHour")
+    console.log(minhour);
+    console.log("maxhour")
+    console.log(maxhour);
+    console.log(d)*/
+    
+
+    // Ordinal scale
+    var x = d3.scaleTime()
+        .range([0, width])
+        .domain([minhour,maxhour]);
+    
+    var x2 = d3.scaleLinear()
+        .range([0, width])
+        .domain([0,  24]);
+    
+	var x3 = d3.scaleLinear()
+        .domain([0, width])
+        .range([0, 24]);    
+    
+    var xa = d3.scaleTime()
+      .range([x2(0),x2(12) ])
+      .domain([minhour,d]);
+    
+    var xb = d3.scaleTime()
+      .range([x2(12), x2(24)])
+      .domain([d,maxhour]);
+    
+    var xc = d3.scaleTime()
+      .range([0, width])
+      .domain([minhour,maxhour]);
+    
+		// Linear scale
+    var y = d3.scaleLinear()
+        .range([height, height - 300])
+    		.domain([0,100]);
+    
+    var line = d3.line()
+        .x(function(d) { return xa(d[0])+minute - shift; })
+        .y(function(d) { return y(d[1]) + 50; });
+    
+    var predictline = d3.line()
+        .x(function(d) { ;return xb(d[0])+minute - shift})
+        .y(function(d) { return y(d[1]) + 50; });
+    
+    var linkedline = d3.line()
+        .x(function(d) { return xc(d[0])+minute - shift})
+        .y(function(d) { return y(d[1]) + 50; });
+      
+    var g = svg.append("g")
+    	.attr("transform", "translate(250, 0)")
+    
+    var verticalLine = svg.append("line").
+    			attr("class", "verticalLine");
+    
+    var tooltip = d3.select("body").append("div")	
+    	.attr("class", "tooltip")				
+    	.style("opacity", 1);
+    
+    var legende = d3.select("body").append("div")	
+    	.attr("class", "legende")				
+    	.style("opacity", 1);
+    
+    var correspTable = [];
+
+//--------
 /*
  * use google maps api built-in mechanism to attach dom events
  */
@@ -131,7 +262,7 @@ var rectangle = null;
   for (var i = 0; i< records.length; i++){
     var myLatLng = {lat : records[i].geometry.coordinates[1] , lng: records[i].geometry.coordinates[0]};
     var marker = new google.maps.Marker({
-      id : i,
+      id : records[i].fields.idstation,
       position : myLatLng,
       map : map,
       title : records[i].fields.nom
@@ -167,6 +298,8 @@ google.maps.event.addDomListener(window, "load", function () {
             rectangle = event.overlay;
             var bounds = rectangle.getBounds();
             console.log(bounds);
+
+			
             for (var i =0; i< allMarkers.length;i++){
               if (bounds.contains(allMarkers[i].getPosition())){
                 // TODO ANTHONY FAINEANT
@@ -174,24 +307,37 @@ google.maps.event.addDomListener(window, "load", function () {
 // Soit tu cree une liste, puis tu fais passer ta liste dans ta fonction
 // Je suis gentil ton intégration va se faire sans souci, j'ai aucun svg, par contre tu l'affecte à la div mapSide
 // Enjoy (ET supprime ces commentaires après ;))
-                console.log(allMarkers[i].id)
-    
+				console.log(allMarkers[i].id);
+				IDS.push(allMarkers[i].id);
+				console.log(IDS);
               }
             }
+			for(var i in IDS){
+			  drawStation(IDS[i], colors[i]);
+			}
+			//console.log(allMarkers);
             drawingManager.setDrawingMode(null);
         }
     });
     
     google.maps.event.addListener(drawingManager, "drawingmode_changed", function() {
         if ((drawingManager.getDrawingMode() == google.maps.drawing.OverlayType.RECTANGLE) && 
-            (rectangle != null))
+            (rectangle != null)){
             rectangle.setMap(null);
+			console.log("ewe");
+			IDS = [];
+			//d3.selectAll("svg").remove();
+			d3.selectAll("path.line").remove();
+
+			
+			}
     });
     
     // when the user clicks somewhere else on the map.
     google.maps.event.addListener(map, 'click', function() {    
-        if(rectangle != null)
+        if(rectangle != null){
             rectangle.setMap(null);
+			}
     });
 });
  
@@ -210,4 +356,192 @@ console.log(allMarkers)
         }
         return coordsBoundaries;
     }
+
+   svg.append("g")
+      .attr("transform", "translate(50," + (height+50) + ")")
+      .call(d3.axisBottom(x)/*.tickFormat(d3.timeFormat("%d-%H:%M"))*/);
+
+  
+    svg.append("g")
+    	.attr("transform", "translate(50," + 50 + ")")
+      .call(d3.axisLeft(y));
+
+function getStation(stationID, records) {
+  var station = {};
+  records.forEach(function(d) {
+     if(d.station_id == stationID){
+       station = d;
+     }
+  });
+  return station;
+}
+    
+function createClearValues(states,modifs){
+  var values = [];
+  for (var index in states) {        	
+    var creneau = states[index];
+    for (var hour in creneau) {
+        var temp = [];
+        var time = index + ":00";
+      
+     	  var t = new Date(hour);
+      	var h = t.getHours();
+      	var m = t.getMinutes();
+      	var d = t.getDate();
+      	t.setHours(h-1);
+      
+      	if(m > 55){
+          t.setHours(h);
+        }
+        t.setMinutes(0);
+      	t.setSeconds(0);
+      	if(t.getHours() == 0){
+          t.setDate(d);
+        }
+      
+      	if(modifs == 1){
+          t.setDate(d+1)
+          if(t.getHours() == 23){
+            t.setDate(d)
+          }
+        }
+      	if(modifs == 2 && index == 1){
+          t.setDate(d+1)
+        }
+      	
+        var newtime = new Date(t);
+        time = parseHour(newtime);
+      	temp[0] = newtime
+        temp[1] = creneau[hour];
+        values[index] = temp;
+      //}
+    }
+  }
+  return values;
+}
+    
+function getData(stationID, records, color){
+    var station = getStation(stationID,records);
+
+  	var temp = [];
+  	var index = 0;
+    for (i = curseur-12; i < curseur; i++) { 
+      	//console.log(i)
+        temp[index] = station.etat[i];
+      	index += 1;
+    }
+  	var values = createClearValues(temp,0);
+    correspTable.push({
+				key : stationID,
+        nom : station.nom,
+        color : color
+      });
+  	//console.log(values)
+    return values;
+}
+    
+function getPredictData(stationID, records, color){
+    var station = getStation(stationID,records);
+    var temp = [];
+    var index = 0;
+   // curseur = station.etat.length-47+hours;
+    for (i = curseur-24; i < curseur-12; i++) { 
+      temp[index] = station.etat[i];
+      index += 1;
+    }
+    var values = createClearValues(temp,1);
+    return values;
+}
+    
+function getLinkedData(stationID, records, color){
+    var station = getStation(stationID,records);
+    var temp = [];
+    var index = 0;
+    temp[0] = station.etat[curseur-1];
+  	temp[1] = station.etat[curseur-24];
+    var values = createClearValues(temp,2);
+    return values;
+}
+
+function drawStation(stationID, color){
+	d3.json("data/allHistoric.json", function(error, data) {
+	  	if (error) throw error;
+    	data.records[stationID].etat = createClearValues(data.records[stationID].etat,0)
+      for (var index in data.records[stationID].etat) {
+        var same = data.records[stationID].etat[index][0].getTime() === d.getTime();
+        var date1 = data.records[stationID].etat[index][0];
+        var date2 = d;
+        if(date1.getHours() === date2.getHours()){
+          if(date1.getDate() === date2.getDate()){
+            curseur = index;
+          }
+        }
+      }
+      //console.log(data.records[stationID].etat)
+			
+      var clearValues = getData(stationID,data.records,color);
+    	var clearPredictValues = getPredictData(stationID,data.records,color);
+    	var clearLinkedValues = getLinkedData(stationID,data.records,color);
+    
+      x.domain(d3.extent(clearValues, function(d) { return d[0]; }));
+			y.domain([0, 100]);
+
+      g.selectAll("line").data([clearValues]).enter().append("path")
+        .attr("class", "line")
+        .attr("d", line)
+        .style("stroke", color)
+    		.on("mouseover", function(d, i) {
+          d3.select(this).style("opacity", 1)
+          drawInfos(stationID, IDS, colors)
+    		})
+        .on("mouseout", function(d, i) {
+      		 d3.select(this).style("opacity", 0.8)
+           tooltip.style("opacity", 0);
+        });
+    
+      g.selectAll("line").data([clearPredictValues]).enter().append("path")
+        .attr("class", "line")
+        .attr("d", predictline)
+        .style("stroke", color)
+      	.style("stroke-dasharray", 5)
+        .on("mouseover", function(d, i) {
+          d3.select(this).style("opacity", 1)
+          //drawInfos(stationID, IDS, colors)
+    		})
+        .on("mouseout", function(d, i) {
+      		 d3.select(this).style("opacity", 0.8)
+           tooltip.style("opacity", 0);
+        });
+      
+      g.selectAll("line").data([clearLinkedValues]).enter().append("path")
+        .attr("class", "line")
+        .attr("d", linkedline)
+        .style("stroke", color)
+      	.style("stroke-dasharray", 5)
+        .on("mouseover", function(d, i) {
+          d3.select(this).style("opacity", 1)
+          //drawInfos(stationID, IDS, colors)
+    		})
+        .on("mouseout", function(d, i) {
+      		 d3.select(this).style("opacity", 0.8)
+           tooltip.style("opacity", 0);
+        });
+  
+      function drawInfos(stationID, IDS, colors){
+		var xCoordinate = d3.event.pageX;
+        var yCoordinate = d3.event.pageY;
+        tooltip.style("opacity", .9);
+        	var index = Math.floor(x3(xCoordinate-58));
+          var value = " ";// = "Heure : " + index + ":00" + "<br><br>";
+          for(var id in IDS){
+            var temp = getData(IDS[id],data.records, colors[id])
+            	value += "<div style=\"color:" + colors[id] + ";\">" + correspTable[IDS[id]].nom + " : "+temp[index][1] + "</div>";
+          }
+          tooltip.html(value)	
+                .style("left", (xCoordinate + 10) + "px")
+                .style("top", (yCoordinate + 10) + "px")
+
+    	}
+    });  
+}
 </script>

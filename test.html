@@ -66,16 +66,18 @@ var rectangle = null;
         boundariesPath.setMap(map);
     });
 
-    d3.json("parking.json", function(json) {
-        for (var i=0; json.features.features.length; i++) {
-          var coordonnees=json.features.features[i].geometry.coordinates;
-          var name=json.parks[i].parkInformation.name;
-          console.log(coordonnees[0])
+    d3.json("https://data.rennesmetropole.fr/api/records/1.0/search/?dataset=export-api-parking-citedia", function(json) {
+    	console.log(json.records.length)
+        for (var i=0; json.records.length; i++) {
+          
+          var coordonnees=json.records[i].fields.geo;
+          console.log(coordonnees)
           var marker = new google.maps.Marker({
           position: {lat: coordonnees[0], lng:coordonnees[1]},
           icon: 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png',
           map: map
         });
+        
      //  boundariesPath.setMap(map);
         };
     });

@@ -197,25 +197,42 @@ var IDS = [];
   var records = json.records;
   for (var i = 0; i< records.length; i++){
     var myLatLng = {lat : records[i].geometry.coordinates[1] , lng: records[i].geometry.coordinates[0]};
-    
+    var content = "<strong> Nom station : </strong>" + records[i].fields.nom + "<br /><strong>Vélos disponibles : </strong>" + records[i].fields.nombrevelosdisponibles + "<br /><strong>Emplacements disponibles : </strong>" + records[i].fields.nombreemplacementsdisponibles
+   	var url = ""
+    if (records[i].fields.etat == "En Panne"){
+    	url = "img/poi-chantier.png"
+    }else{
+  		var tauxRemplissage = records[i].fields.nombrevelosdisponibles / records[i].fields.nombreemplacementsdisponibles
+    	if (tauxRemplissage == 0){
+    		url = "img/station-0.png"
+    	}else if(tauxRemplissage < 25){
+    		url = "img/station-25.png"
+    	}else if(tauxRemplissage < 50){
+    		url = "img/station-50.png"
+    	}else if(tauxRemplissage < 75){
+    		url = "img/station-75.png"
+    	}else{
+    		url = "img/station-100.png"
+    	}
+    }
+
     var marker = new google.maps.Marker({
       id : records[i].fields.idstation,
       position : myLatLng,
       map : map,
-      title : records[i].fields.nom
+      title : records[i].fields.nom,
+      icon : url
     });
 
-    var content = "<strong> Nom station : </strong>" + records[i].fields.nom + "<br /><strong>Vélos disponibles : </strong>" + records[i].fields.nombrevelosdisponibles + "<br /><strong>Emplacements disponibles : </strong>" + records[i].fields.nombreemplacementsdisponibles
 
     var infoWindows = new google.maps.InfoWindow()
-    // StackOverFlow
+   // StackOverFlow
     google.maps.event.addListener(marker,'click', (function(marker,content,infoWindows){ 
         return function() {
            infoWindows.setContent(content);
            infoWindows.open(map,marker);
         };
     })(marker,content,infoWindows)); 
-
     allMarkers.push(marker)
   }
 });

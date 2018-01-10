@@ -254,12 +254,10 @@
                 //d3.selectAll("svg").remove();
                 correspTable = [];
                 d3.selectAll("path.line").remove();
-                drawLegende(IDS, colors)
-
-
+                //drawLegende(IDS, colors)
+				document.getElementById("legende").innerHTML = "";
             }
         });
-
         // when the user clicks somewhere else on the map.
         google.maps.event.addListener(map, 'click', function() {
             if (rectangle != null) {
@@ -441,11 +439,11 @@
                 .style("stroke", color)
                 .on("mouseover", function(d, i) {
                     d3.select(this).style("opacity", 1)
-                    drawInfos(stationID, IDS, colors)
+                    drawInfos(stationID, IDS, colors, 0)
                 })
                 .on("mouseout", function(d, i) {
                     d3.select(this).style("opacity", 0.8)
-                        //tooltip.style("opacity", 0);
+                    //tooltip.style("opacity", 0);
                 });
 
             g.selectAll("line").data([clearPredictValues]).enter().append("path")
@@ -455,7 +453,7 @@
                 .style("stroke-dasharray", 5)
                 .on("mouseover", function(d, i) {
                     d3.select(this).style("opacity", 1)
-                        //drawInfos(stationID, IDS, colors)
+                    drawInfos(stationID, IDS, colors, 1)
                 })
                 .on("mouseout", function(d, i) {
                     d3.select(this).style("opacity", 0.8)
@@ -469,30 +467,40 @@
                 .style("stroke-dasharray", 5)
                 .on("mouseover", function(d, i) {
                     d3.select(this).style("opacity", 1)
-                        //drawInfos(stationID, IDS, colors)
+                    drawInfos(stationID, IDS, colors, 2)
                 })
                 .on("mouseout", function(d, i) {
                     d3.select(this).style("opacity", 0.8)
                         //tooltip.style("opacity", 0);
                 });
 
-            function drawInfos(stationID, IDS, colors) {
-                var xCoordinate = d3.event.pageX;
-                var yCoordinate = d3.event.pageY;
-                //legende.style("opacity", .9);
-                var index = Math.floor(x3(xCoordinate - 964));
-                var value = ""; // = "Heure : " + index + ":00" + "<br><br>";
-                for (var id in IDS) {
-                    var temp = getData(IDS[id], data.records, colors[id])
-                    console.log(temp);
-                    console.log(xCoordinate);
-                    //value += "<div style=\"color:" + colors[id] + ";\">" + "blabla" + "</div>";
-                    value += "<div style=\"color:" + colors[id] + ";\">" + correspTable[id].nom + " : " + temp[index][1] + "</div>";
-                }
-                //value += "";
-                document.getElementById("legende").innerHTML = value;
+			  function drawInfos(stationID, IDS, colors, type){
+				var xCoordinate = d3.event.pageX;
+				var yCoordinate = d3.event.pageY;
+				//legende.style("opacity", .9);
+					var index = Math.floor(x3(xCoordinate-882));
+				  var value = ""; // = "Heure : " + index + ":00" + "<br><br>";
+				  for(var id in IDS){
+					var temp;
 
-            }
+						//value += "<div style=\"color:" + colors[id] + ";\">" + "blabla" + "</div>";
+					if(type == 0){
+						temp = getData(IDS[id],data.records, colors[id])
+						value += "<div style=\"color:" + colors[id] + ";\">" + correspTable[id].nom + " : "+temp[index][1] + "</div>";
+					}
+					if(type == 1){
+						temp = getPredictData(IDS[id],data.records, colors[id])
+						value += "<div style=\"color:" + colors[id] + ";\">" + correspTable[id].nom + " : "+temp[index-12][1] + "</div>";
+					}
+					if(type == 2){
+						temp = getLinkedData(IDS[id],data.records, colors[id])
+						value += "<div style=\"color:" + colors[id] + ";\">" + correspTable[id].nom + " : "+temp[index-11][1] + "</div>";
+					}
+				  }
+				  //value += "";
+				  document.getElementById("legende").innerHTML = value;
+
+				}
 
         });
 

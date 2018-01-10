@@ -136,6 +136,7 @@
 
         for (var i = 0; json.records.length; i++) {
             var coordonnees = json.records[i].fields.geo;
+            var content = "<strong> Nom parking : </strong>" + json.records[i].fields.key + "<br /><strong>Places disponibles : </strong>" + json.records[i].fields.free
             var icon_park=""
             var free=json.records[i].fields.free
             var maxi=json.records[i].fields.max
@@ -195,7 +196,14 @@
                 title: json.records[i].fields.key,
                 map: map
             });
-
+            var infoWindows = new google.maps.InfoWindow()
+                // StackOverFlow
+            google.maps.event.addListener(marker, 'click', (function(marker, content, infoWindows) {
+                return function() {
+                    infoWindows.setContent(content);
+                    infoWindows.open(map, marker);
+                };
+            })(marker, content, infoWindows));
             allMarkers.push(marker)
         };
     });
@@ -213,20 +221,32 @@
             if (records[i].fields.etat == "En Panne") {
                 url = "img/poi-chantier.png"
             } else {
-                var tauxRemplissage = records[i].fields.nombrevelosdisponibles / records[i].fields.nombreemplacementsdisponibles
+                var tauxRemplissage = records[i].fields.nombrevelosdisponibles / records[i].fields.nombreemplacementsactuels 
                 if (tauxRemplissage == 0) {
-                    url = "img/station-0.png"
-                } else if (tauxRemplissage < 25) {
-                    url = "img/station-25.png"
-                } else if (tauxRemplissage < 50) {
-                    url = "img/station-50.png"
-                } else if (tauxRemplissage < 75) {
-                    url = "img/station-75.png"
+                    url = "img/velo0.png"
+                } else if (tauxRemplissage < 0.15) {
+                    url = "img/velo10.png"
+                } else if (tauxRemplissage < 0.25) {
+                    url = "img/velo20.png"
+                } else if (tauxRemplissage < 0.35) {
+                    url = "img/velo30.png"
+                } else if (tauxRemplissage < 0.45) {
+                    url = "img/velo40.png"
+                } else if (tauxRemplissage < 0.55) {
+                    url = "img/velo50.png"
+                } else if (tauxRemplissage < 0.65) {
+                    url = "img/velo60.png"
+                } else if (tauxRemplissage < 0.75) {
+                    url = "img/velo70.png"
+                } else if (tauxRemplissage < 0.85) {
+                    url = "img/velo80.png"
+                } else if (tauxRemplissage < 0.95) {
+                    url = "img/velo90.png"
                 } else {
-                    url = "img/station-100.png"
+                    url = "img/velo100.png"
                 }
             }
-
+            // source marker : https://www.iconfinder.com/
             var marker = new google.maps.Marker({
                 id: records[i].fields.idstation,
                 position: myLatLng,

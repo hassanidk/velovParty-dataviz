@@ -799,7 +799,7 @@
     }
          
     var slider = document.getElementById("divSlider")
-    var playButton = document.getElementById("playButton")
+
     // From Google API Documentation
     function CenterControl(controlDiv, map) {
 
@@ -850,7 +850,7 @@ function mapSlider(){
         controlText.innerHTML = 'Mode temps réel'
         modeVisu = 1
         slider.style.visibility ="visible"
-        playButton.style.visibility = "visible"
+
    // On supprime les marqueurs d'abord
 
 
@@ -960,7 +960,6 @@ function mapSlider(){
         }else{
         controlText.innerHTML = 'Mode slider'
         slider.style.visibility = "hidden"
-        playButton.style.visibility = "hidden"
         modeVisu = 0
         setParks()
         setVelo()

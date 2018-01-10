@@ -24,7 +24,7 @@
     var onlyHour = d3.timeFormat("%H");
 
     //PARAMETRES A CHANGER POUR FAIRE VARIER !
-    var d = new Date("Thu Jan 02 2018 03:00:00 GMT+0100");
+    var d = new Date("Thu Jan 02 2018 01:00:00 GMT+0100");
     //IDS = [1,2,3,4,5];
 
 
@@ -284,11 +284,12 @@
     }
 
     svg.append("g")
+		.attr("class", "xaxis")
         .attr("transform", "translate(50," + (height + 50) + ")")
         .call(d3.axisBottom(x) /*.tickFormat(d3.timeFormat("%d-%H:%M"))*/ );
 
-
     svg.append("g")
+		.attr("class", "yaxis")
         .attr("transform", "translate(50," + 50 + ")")
         .call(d3.axisLeft(y));
 
@@ -402,6 +403,53 @@
         var values = createClearValues(temp, 2);
         return values;
     }
+	
+	function drawStationAtDate(){
+		console.log("test");
+		var tempDate = d;
+		d3.selectAll("path.line").remove();
+		d3.selectAll("g.xaxis").remove();
+		
+		d.setHours(tempDate.getHours()+1);
+		hours = d.getHours();
+		centralHour = hours;
+		minhour = new Date(d);
+		maxhour = new Date(d);
+
+		minhour.setHours(centralHour - 12);
+		maxhour.setHours(centralHour + 12);
+		
+		x = d3.scaleTime()
+			.range([0, width])
+			.domain([minhour, maxhour]);
+		
+		svg.append("g")
+		.attr("class", "xaxis")
+        .attr("transform", "translate(50," + (height + 50) + ")")
+        .call(d3.axisBottom(x));
+		
+		xa = d3.scaleTime()
+        .range([x2(0), x2(12)])
+        .domain([minhour, d]);
+
+        xb = d3.scaleTime()
+        .range([x2(12), x2(24)])
+        .domain([d, maxhour]);
+
+        xc = d3.scaleTime()
+        .range([0, width])
+        .domain([minhour, maxhour]);
+/*
+		svg.append("g")
+			.attr("class", "yaxis")
+			.attr("transform", "translate(50," + 50 + ")")
+			.call(d3.axisLeft(y));*/
+			
+		console.log(d);
+		for (var i in IDS) {
+			drawStation(IDS[i], colors[i]);
+		}
+	}
 
     function drawStation(stationID, color) {
         d3.json("data/allHistoric.json", function(error, data) {
@@ -503,17 +551,4 @@
 				}
 
         });
-
-        function drawLegende(IDS, colors) {
-            var value = ""; // = "Heure : " + index + ":00" + "<br><br>";
-            for (var id in IDS) {
-                var temp = getData(IDS[id], data.records, colors[id])
-                    //console.log(temp);
-                    //console.log(xCoordinate);
-                    //value += "<div style=\"color:" + colors[id] + ";\">" + "blabla" + "</div>";
-                value += "<div style=\"color:" + colors[id] + ";\">" + correspTable[id].nom + "</div>";
-            }
-            document.getElementById("legende").innerHTML = value;
-            console.log(value);
-        }
     }

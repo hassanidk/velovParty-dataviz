@@ -23,6 +23,7 @@
     var allLatLng = []
     var rectangle = null;
     var IDS = [];
+	var setIDS = new Set();
     var modeVisu = 0
 
 
@@ -132,6 +133,7 @@
       .style("opacity", 1);*/
 
     var correspTable = [];
+	var parkingTable = [];
 
     //--------
     /*
@@ -158,8 +160,11 @@
     function loadParks(){
         d3.json("https://data.rennesmetropole.fr/api/records/1.0/search/?dataset=export-api-parking-citedia", function(json) {
 
-
         for (var i = 0; json.records.length; i++) {
+			parkingTable.push({
+				key: 100+i,
+				nom: json.records[i].fields.key
+			});
             var coordonnees = json.records[i].fields.geo;
             var content = "<strong> Nom parking : </strong>" + json.records[i].fields.key + "<br /><strong>Places disponibles : </strong>" + json.records[i].fields.free
             var icon_park=""
@@ -219,6 +224,7 @@
             })(marker, content, infoWindows));
             allMarkers.push(marker)
         };
+		
     });
         }
     loadVelo()
@@ -312,10 +318,12 @@
 
                 for (var i = 0; i < allMarkers.length; i++) {
                     if (bounds.contains(allMarkers[i].getPosition())) {
-                        IDS.push(allMarkers[i].id);
+                        //IDS.push(allMarkers[i].id);
+						setIDS.add(allMarkers[i].id);
 						//console.log(allMarkers[i].id);
                     }
                 }
+				for(let item of setIDS) IDS.push(item);
                 for (var i in IDS) {
                     drawStation(IDS[i], colors[i]);
                 }
@@ -330,11 +338,13 @@
                 rectangle.setMap(null);
                 //console.log("ewe");
                 IDS = [];
+				setIDS = new Set();
                 //d3.selectAll("svg").remove();
                 correspTable = [];
                 d3.selectAll("path.line").remove();
                 //drawLegende(IDS, colors)
 				document.getElementById("legende").innerHTML = "";
+				document.getElementById("legendePark").innerHTML = "";
             }
         });
         // when the user clicks somewhere else on the map.
@@ -382,15 +392,14 @@
     function getIndexofStation(stationID, records) {
         var station = {};
         var index, temp = 0;
-
-        records.forEach(function(d) {
-            if (d.station_id == stationID) {
-                station = d;
-                index = temp;
-            }
-            temp += 1;
-        });
-        return index;
+		records.forEach(function(d) {
+			if (d.station_id == stationID) {
+				station = d;
+				index = temp;
+			}
+			temp += 1;
+		});
+		return index;
     }
 
     function createClearValues(states, modifs) {
@@ -538,22 +547,43 @@
 	
 	function drawLegende(){
 		//console.log(correspTable[1]);
-		var value = "";
+		var value = "Velos <br>";
+		var valueP = "Parking <br>";
 		for(var id in IDS){
-			//console.log(id);
-			value += "<div style=\"color:" + colors[id] + ";\">" + correspTable[id].nom + "</div>";
+			console.log(IDS[id]);
+			if(IDS[id] > 82)
+				valueP += "<div style=\"color:" + colors[id] + ";\">" + correspTable[id].nom + "</div>";
+			else
+				value += "<div style=\"color:" + colors[id] + ";\">" + correspTable[id].nom + "</div>";
 		}
+		document.getElementById("legendePark").innerHTML = valueP;
 		document.getElementById("legende").innerHTML = value;
 	}
 
     function drawStation(stationID, color) {
-        d3.json("data/allHistoric.json", function(error, data) {
+        d3.json("data/all_historic.json", function(error, data) {
             if (error) throw error;
-			//console.log(stationID);
-            //console.log(getStation(stationID, data.records));
-            //console.log(data.records);
-            //console.log(data.records[getIndexofStation(stationID, data.records)].etat);
+			console.log(stationID);
+            console.log(getStation(stationID, data.records));
+            console.log(data.records);
+            console.log(getIndexofStation(stationID, data.records));
 
+			if(stationID > 100){
+				var name;
+				parkingTable.forEach(function(d) { 
+					if(d.key == stationID){
+						name = d.nom;
+					}
+				});
+				data.records.forEach(function(d) { 
+					if(d.nom == name){
+						stationID = d.station_id;;
+					}
+				});
+				console.log(stationID);
+			}
+			
+			
             var state = data.records[getIndexofStation(stationID, data.records)].etat;
             state = createClearValues(state, 0)
             for (var index in state) {
@@ -566,6 +596,8 @@
                     }
                 }
             }
+			
+
             //console.log(data.records[stationID].etat)
 
             var clearValues = getData(stationID, data.records, color);
@@ -622,46 +654,37 @@
 				var xCoordinate = d3.event.pageX;
 				var yCoordinate = d3.event.pageY;
 				//legende.style("opacity", .9);
-					var index = Math.floor(x3(xCoordinate-1193));
-				  var value = ""; // = "Heure : " + index + ":00" + "<br><br>";
+				  var index = Math.floor(x3(xCoordinate-1193));
+				  var value = "Velos <br>";
+				  var valueP = "Parkings <br>";
 				  for(var id in IDS){
 					var temp;
 					//console.log(index);
 					//console.log(xCoordinate);
 						//value += "<div style=\"color:" + colors[id] + ";\">" + "blabla" + "</div>";
+					var write = "";
 					if(type == 0){
 						temp = getData(IDS[id],data.records, colors[id])
-						value += "<div style=\"color:" + colors[id] + ";\">" + correspTable[id].nom + " : "+temp[index][1] + "</div>";
+						write += "<div style=\"color:" + colors[id] + ";\">" + correspTable[id].nom + " : "+temp[index][1] + "</div>";
 					}
 					if(type == 1){
 						temp = getPredictData(IDS[id],data.records, colors[id])
-						value += "<div style=\"color:" + colors[id] + ";\">" + correspTable[id].nom + " : "+temp[index-12][1] + "</div>";
+						write += "<div style=\"color:" + colors[id] + ";\">" + correspTable[id].nom + " : "+temp[index-12][1] + "</div>";
 					}
 					if(type == 2){
 						temp = getLinkedData(IDS[id],data.records, colors[id])
-						value += "<div style=\"color:" + colors[id] + ";\">" + correspTable[id].nom + " : "+temp[index-11][1] + "</div>";
+						write += "<div style=\"color:" + colors[id] + ";\">" + correspTable[id].nom + " : "+temp[index-11][1] + "</div>";
 					}
-				  }
+					if(IDS[id] > 82)
+						valueP += write;
+					else
+						value += write;
 				  //value += "";
-
-				  document.getElementById("legende").innerHTML = value;
-
-				}
-
+				  }
+					document.getElementById("legendePark").innerHTML = valueP;
+					document.getElementById("legende").innerHTML = value;
+			}
         });
-
-        function drawLegende(IDS, colors) {
-            var value = ""; // = "Heure : " + index + ":00" + "<br><br>";
-            for (var id in IDS) {
-                var temp = getData(IDS[id], data.records, colors[id])
-                    //console.log(temp);
-                    //console.log(xCoordinate);
-                    //value += "<div style=\"color:" + colors[id] + ";\">" + "blabla" + "</div>";
-                value += "<div style=\"color:" + colors[id] + ";\">" + correspTable[id].nom + "</div>";
-            }
-            document.getElementById("legende").innerHTML = value;
-            console.log(value);
-        }
     }
          
     // From Google API Documentation
@@ -708,7 +731,7 @@ function mapSlider(){
    // On supprime les marqueurs d'abord
 
    console.log(allMarkers)
-    d3.json("data/allHistoric.json", function(json) {
+    d3.json("data/all_historic.json", function(json) {
         // Methode Google MAP
         var records = json.records
 
@@ -756,7 +779,7 @@ function mapSlider(){
         }else{
         controlText.innerHTML = 'Mode slider'
         modeVisu = 0
-        loadParks()
-        loadVelo()
+		loadParks();
+		loadVelo();
     }
 }

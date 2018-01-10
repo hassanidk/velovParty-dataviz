@@ -136,13 +136,18 @@
 
         for (var i = 0; json.records.length; i++) {
             var coordonnees = json.records[i].fields.geo;
+            var icon_park=""
+            var free=json.records[i].fields.free
+            var maxi=json.records[i].fields.max
+            var remplissage=(maxi-free)/maxi
+            console.log(remplissage)
             var marker = new google.maps.Marker({
                 position: {
                     lat: coordonnees[0],
                     lng: coordonnees[1]
                 },
                 store_id: 100 + i,
-                icon: 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png',
+                icon: 'img/parking100.png',
                 title: json.records[i].fields.key,
                 map: map
             });

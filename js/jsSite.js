@@ -4,13 +4,31 @@
         center: new google.maps.LatLng(48.117266, -1.677793),
         mapTypeId: google.maps.MapTypeId.ROADMAP
     });
+            // Create the DIV to hold the control and call the CenterControl()
+        // constructor passing in this DIV.
+        var centerControlDiv = document.createElement('div');
+        var controlText = document.createElement('div');
+        var centerControl = new CenterControl(centerControlDiv, map);
+
+        centerControlDiv.index = 1;
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
+
+    /* // Create the search box and link to the UI
+    var input = document.getElementById('pac-input');
+    var searchBox = new google.maps.places.SearchBox(input);
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+*/  
+    // Initialize variable to stock some importants informations
     var allMarkers = []
+    var allLatLng = []
     var rectangle = null;
     var IDS = [];
+    var modeVisu = 0
 
-    //------
+
+    // Create SVG
     var svg = d3.select("#mapSide").append("svg")
-        .attr("width", 960)
+        .attr("width", 750)
         .attr("height", 450);
 
     var width = 600;
@@ -19,6 +37,7 @@
     var curseur = 0;
     var shift = 200;
 
+    // Variables for manipulate time in the easiest way
     var parseHour = d3.timeParse("%H:%M");
     var displayHour = d3.timeFormat("%H:%M");
     var onlyHour = d3.timeFormat("%H");
@@ -27,13 +46,14 @@
     var d = new Date("Thu Jan 02 2018 01:00:00 GMT+0100");
     //IDS = [1,2,3,4,5];
 
-
+    // Split the dateTime
     var hours = d.getHours();
     var minute = d.getMinutes() * 100 / 3 / 60;
     var centralHour = hours;
     var minhour = new Date(d);
     var maxhour = new Date(d);
 
+    // Set interval between the hour
     minhour.setHours(centralHour - 12);
     maxhour.setHours(centralHour + 12);
     /*console.log("minHour")
@@ -132,7 +152,12 @@
         boundariesPath.setMap(map);
     });
 
-    d3.json("https://data.rennesmetropole.fr/api/records/1.0/search/?dataset=export-api-parking-citedia", function(json) {
+
+    // Iteration through the parking file
+    loadParks()
+    function loadParks(){
+        d3.json("https://data.rennesmetropole.fr/api/records/1.0/search/?dataset=export-api-parking-citedia", function(json) {
+
 
         for (var i = 0; json.records.length; i++) {
             var coordonnees = json.records[i].fields.geo;
@@ -207,15 +232,18 @@
             allMarkers.push(marker)
         };
     });
-
-    d3.json("https://data.rennesmetropole.fr/api/records/1.0/search/?rows=100&dataset=etat-des-stations-le-velo-star-en-temps-reel&facet=nom&facet=etat&facet=nombreemplacementsactuels&facet=nombreemplacementsdisponibles&facet=nombrevelosdisponibles", function(json) {
-        // Methode Google MAP
-        var records = json.records;
-        for (var i = 0; i < records.length; i++) {
-            var myLatLng = {
-                lat: records[i].geometry.coordinates[1],
-                lng: records[i].geometry.coordinates[0]
-            };
+        }
+    loadVelo()
+    function loadVelo(){
+        d3.json("https://data.rennesmetropole.fr/api/records/1.0/search/?rows=100&dataset=etat-des-stations-le-velo-star-en-temps-reel&facet=nom&facet=etat&facet=nombreemplacementsactuels&facet=nombreemplacementsdisponibles&facet=nombrevelosdisponibles", function(json) {
+            // Methode Google MAP
+            var records = json.records;
+            for (var i = 0; i < records.length; i++) {
+                var myLatLng = {
+                    lat: records[i].geometry.coordinates[1],
+                    lng: records[i].geometry.coordinates[0]
+                };
+                allLatLng.push(myLatLng)
             var content = "<strong> Nom station : </strong>" + records[i].fields.nom + "<br /><strong>Vélos disponibles : </strong>" + records[i].fields.nombrevelosdisponibles + "<br /><strong>Emplacements disponibles : </strong>" + records[i].fields.nombreemplacementsdisponibles
             var url = ""
             if (records[i].fields.etat == "En Panne") {
@@ -256,17 +284,19 @@
             });
 
 
-            var infoWindows = new google.maps.InfoWindow()
-                // StackOverFlow
-            google.maps.event.addListener(marker, 'click', (function(marker, content, infoWindows) {
-                return function() {
-                    infoWindows.setContent(content);
-                    infoWindows.open(map, marker);
-                };
-            })(marker, content, infoWindows));
-            allMarkers.push(marker)
-        }
-    });
+                var infoWindows = new google.maps.InfoWindow()
+                    // StackOverFlow
+                google.maps.event.addListener(marker, 'click', (function(marker, content, infoWindows) {
+                    return function() {
+                        infoWindows.setContent(content);
+                        infoWindows.open(map, marker);
+                    };
+                })(marker, content, infoWindows));
+                allMarkers.push(marker)
+            }
+        });
+    }
+   
     google.maps.event.addDomListener(window, "load", function() {
         var drawingManager = new google.maps.drawing.DrawingManager({
             drawingControl: true,
@@ -291,25 +321,17 @@
                     rectangle.setMap(null);
                 rectangle = event.overlay;
                 var bounds = rectangle.getBounds();
-                console.log(bounds);
-
 
                 for (var i = 0; i < allMarkers.length; i++) {
                     if (bounds.contains(allMarkers[i].getPosition())) {
-                        // TODO ANTHONY FAINEANT
-                        // Je t'aide un peu pour l'intégration, tu as le choix. Soit t'utilise l'id et appelle ta fonction pour chaque ID
-                        // Soit tu cree une liste, puis tu fais passer ta liste dans ta fonction
-                        // Je suis gentil ton intégration va se faire sans souci, j'ai aucun svg, par contre tu l'affecte à la div mapSide
-                        // Enjoy (ET supprime ces commentaires après ;))
-
                         IDS.push(allMarkers[i].id);
-						console.log(allMarkers[i].id);
+						//console.log(allMarkers[i].id);
                     }
                 }
                 for (var i in IDS) {
                     drawStation(IDS[i], colors[i]);
                 }
-                //console.log(allMarkers);
+				
                 drawingManager.setDrawingMode(null);
             }
         });
@@ -318,7 +340,7 @@
             if ((drawingManager.getDrawingMode() == google.maps.drawing.OverlayType.RECTANGLE) &&
                 (rectangle != null)) {
                 rectangle.setMap(null);
-                console.log("ewe");
+                //console.log("ewe");
                 IDS = [];
                 //d3.selectAll("svg").remove();
                 correspTable = [];
@@ -334,9 +356,6 @@
             }
         });
     });
-
-    console.log(allMarkers)
-
     function boundariesRennes(data) {
         var resultArray = [];
         for (var i = 0; i < data.length; i++) {
@@ -392,7 +411,7 @@
             var creneau = states[index];
             for (var hour in creneau) {
                 var temp = [];
-                var time = index + ":00";
+                var time;
 
                 var t = new Date(hour);
                 var h = t.getHours();
@@ -477,11 +496,13 @@
         return values;
     }
 	
-	function drawStationAtDate(){
+	function drawStationAtDate(time){
 		//var tempDate = d;
 		//d.setHours(tempDate.getHours()+1);
 		
-		d = new Date("Thu Jan 03 2018 01:00:00 GMT+0100");
+		//d = new Date("Thu Jan 03 2018 01:00:00 GMT+0100");
+		console.log(time)
+		d = new Date(time);
 		d3.selectAll("path.line").remove();
 		d3.selectAll("g.xaxis").remove();
 		
@@ -524,15 +545,26 @@
 		for (var i in IDS) {
 			drawStation(IDS[i], colors[i]);
 		}
+		drawLegende();
+	}
+	
+	function drawLegende(){
+		//console.log(correspTable[1]);
+		var value = "";
+		for(var id in IDS){
+			//console.log(id);
+			value += "<div style=\"color:" + colors[id] + ";\">" + correspTable[id].nom + "</div>";
+		}
+		document.getElementById("legende").innerHTML = value;
 	}
 
     function drawStation(stationID, color) {
         d3.json("data/allHistoric.json", function(error, data) {
             if (error) throw error;
-			console.log(stationID);
-            console.log(getStation(stationID, data.records));
+			//console.log(stationID);
+            //console.log(getStation(stationID, data.records));
             //console.log(data.records);
-            console.log(data.records[getIndexofStation(stationID, data.records)].etat);
+            //console.log(data.records[getIndexofStation(stationID, data.records)].etat);
 
             var state = data.records[getIndexofStation(stationID, data.records)].etat;
             state = createClearValues(state, 0)
@@ -556,7 +588,7 @@
                 return d[0];
             }));
             y.domain([0, 100]);
-
+				
             g.selectAll("line").data([clearValues]).enter().append("path")
                 .attr("class", "line")
                 .attr("d", line)
@@ -606,8 +638,8 @@
 				  var value = ""; // = "Heure : " + index + ":00" + "<br><br>";
 				  for(var id in IDS){
 					var temp;
-									  console.log(index);
-				  console.log(xCoordinate);
+					//console.log(index);
+					//console.log(xCoordinate);
 						//value += "<div style=\"color:" + colors[id] + ";\">" + "blabla" + "</div>";
 					if(type == 0){
 						temp = getData(IDS[id],data.records, colors[id])
@@ -629,4 +661,114 @@
 				}
 
         });
+
+        function drawLegende(IDS, colors) {
+            var value = ""; // = "Heure : " + index + ":00" + "<br><br>";
+            for (var id in IDS) {
+                var temp = getData(IDS[id], data.records, colors[id])
+                    //console.log(temp);
+                    //console.log(xCoordinate);
+                    //value += "<div style=\"color:" + colors[id] + ";\">" + "blabla" + "</div>";
+                value += "<div style=\"color:" + colors[id] + ";\">" + correspTable[id].nom + "</div>";
+            }
+            document.getElementById("legende").innerHTML = value;
+            console.log(value);
+        }
     }
+         
+    // From Google API Documentation
+    function CenterControl(controlDiv, map) {
+
+        // Set CSS for the control border.
+        var controlUI = document.createElement('div');
+        controlUI.style.backgroundColor = '#fff';
+        controlUI.style.border = '2px solid #fff';
+        controlUI.style.borderRadius = '3px';
+        controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+        controlUI.style.cursor = 'pointer';
+        controlUI.style.marginBottom = '22px';
+        controlUI.style.textAlign = 'center';
+        controlUI.title = '';
+        controlDiv.appendChild(controlUI);
+
+        // Set CSS for the control interior.
+
+  
+        controlText.style.color = 'rgb(25,25,25)';
+        controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+        controlText.style.fontSize = '16px';
+        controlText.style.lineHeight = '38px';
+        controlText.style.paddingLeft = '5px';
+        controlText.style.paddingRight = '5px';
+        controlText.innerHTML = 'Mode slider';
+        controlUI.appendChild(controlText);
+
+     
+        controlUI.addEventListener('click', mapSlider)
+      }
+
+
+function mapSlider(){
+   console.log(allMarkers.length)
+   for (var i = 0; i<allMarkers.length; i++){
+    allMarkers[i].setMap(null)
+   }
+    if (modeVisu == 0){
+        controlText.innerHTML = 'Mode temps réel'
+        modeVisu = 1
+    allKeys = []
+   // On supprime les marqueurs d'abord
+
+   console.log(allMarkers)
+    d3.json("data/allHistoric.json", function(json) {
+        // Methode Google MAP
+        var records = json.records
+
+        var timeValue = records[82].etat;
+        for (var i = 0; i<timeValue.length; i++){
+            var keys = timeValue[i];
+            for (key in keys){
+                allKeys.push(key)
+            }
+        }
+
+        for (var i = 0; i < records.length; i++) {
+            var myLatLng = {
+                lat: allLatLng[i].lat, 
+                lng: allLatLng[i].lng
+            }
+
+            
+            var tauxRemplissage = records[i].etat[19][allKeys[19]]  
+            
+            if (tauxRemplissage == 0) {
+                url = "img/station-0.png"
+            } else if (tauxRemplissage < 25) {
+                url = "img/station-25.png"
+            } else if (tauxRemplissage < 50) {
+                url = "img/station-50.png"
+            } else if (tauxRemplissage < 75) {
+                url = "img/station-75.png"
+            } else {
+                url = "img/station-100.png"
+            }
+            
+
+            var marker = new google.maps.Marker({
+                id: records[i].station_id,
+                position: myLatLng,
+                map: map,
+                title: records[i].nom,
+                icon: url
+            }); 
+
+            allMarkers.push(marker)
+        }
+    });
+        }else{
+        controlText.innerHTML = 'Mode slider'
+        modeVisu = 0
+        loadParks()
+        loadVelo()
+    }
+}

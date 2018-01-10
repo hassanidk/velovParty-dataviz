@@ -324,20 +324,14 @@
 
                 for (var i = 0; i < allMarkers.length; i++) {
                     if (bounds.contains(allMarkers[i].getPosition())) {
-                        // TODO ANTHONY FAINEANT
-                        // Je t'aide un peu pour l'intégration, tu as le choix. Soit t'utilise l'id et appelle ta fonction pour chaque ID
-                        // Soit tu cree une liste, puis tu fais passer ta liste dans ta fonction
-                        // Je suis gentil ton intégration va se faire sans souci, j'ai aucun svg, par contre tu l'affecte à la div mapSide
-                        // Enjoy (ET supprime ces commentaires après ;))
-
                         IDS.push(allMarkers[i].id);
-						console.log(allMarkers[i].id);
+						//console.log(allMarkers[i].id);
                     }
                 }
                 for (var i in IDS) {
                     drawStation(IDS[i], colors[i]);
                 }
-                //console.log(allMarkers);
+				
                 drawingManager.setDrawingMode(null);
             }
         });
@@ -346,7 +340,7 @@
             if ((drawingManager.getDrawingMode() == google.maps.drawing.OverlayType.RECTANGLE) &&
                 (rectangle != null)) {
                 rectangle.setMap(null);
-                console.log("ewe");
+                //console.log("ewe");
                 IDS = [];
                 //d3.selectAll("svg").remove();
                 correspTable = [];
@@ -362,7 +356,6 @@
             }
         });
     });
-   
     function boundariesRennes(data) {
         var resultArray = [];
         for (var i = 0; i < data.length; i++) {
@@ -552,15 +545,26 @@
 		for (var i in IDS) {
 			drawStation(IDS[i], colors[i]);
 		}
+		drawLegende();
+	}
+	
+	function drawLegende(){
+		//console.log(correspTable[1]);
+		var value = "";
+		for(var id in IDS){
+			//console.log(id);
+			value += "<div style=\"color:" + colors[id] + ";\">" + correspTable[id].nom + "</div>";
+		}
+		document.getElementById("legende").innerHTML = value;
 	}
 
     function drawStation(stationID, color) {
         d3.json("data/allHistoric.json", function(error, data) {
             if (error) throw error;
-			console.log(stationID);
-            console.log(getStation(stationID, data.records));
+			//console.log(stationID);
+            //console.log(getStation(stationID, data.records));
             //console.log(data.records);
-            console.log(data.records[getIndexofStation(stationID, data.records)].etat);
+            //console.log(data.records[getIndexofStation(stationID, data.records)].etat);
 
             var state = data.records[getIndexofStation(stationID, data.records)].etat;
             state = createClearValues(state, 0)
@@ -584,7 +588,7 @@
                 return d[0];
             }));
             y.domain([0, 100]);
-
+				
             g.selectAll("line").data([clearValues]).enter().append("path")
                 .attr("class", "line")
                 .attr("d", line)
@@ -634,8 +638,8 @@
 				  var value = ""; // = "Heure : " + index + ":00" + "<br><br>";
 				  for(var id in IDS){
 					var temp;
-									  console.log(index);
-				  console.log(xCoordinate);
+					//console.log(index);
+					//console.log(xCoordinate);
 						//value += "<div style=\"color:" + colors[id] + ";\">" + "blabla" + "</div>";
 					if(type == 0){
 						temp = getData(IDS[id],data.records, colors[id])

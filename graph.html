@@ -11,29 +11,43 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script>
-$(function() {
 	var debut = new Date("Thu Jan 02 2018 01:00:00 GMT+0100")
 	var fin = new Date("Thu Jan 05 2018 01:00:00 GMT+0100")
+	var newTime = debut;
+	var displayHour = d3.timeFormat("%d/%m- %H:%M");
+$(function() {
     $("#slider").slider({
         range: false,
         min: debut.getTime(),
         max: fin.getTime(),
         step: 3600000,
         slide: function(e, ui) {
-            /*var hours = Math.floor(ui.value / 60);
-            var minutes = ui.value - (hours * 60);
-
-            if(hours.toString().length == 1) hours = '0' + hours;
-            if(minutes.toString().length == 1) minutes = '0' + minutes;*/
-			var newTime = new Date(ui.value);
+			newTime = new Date(ui.value);
 			var hour = newTime.getHours();
 			var date = newTime.getDate();
-			var displayHour = d3.timeFormat("%d/%m - %H:%M");
 			var index = (ui.value - debut.getTime()) / 3600000;
-            $('#value').html(displayHour(newTime));
+            $('#value').html(newTime.getDate() + "/" + newTime.getMonth()+1 + " - " + displayHour(newTime));
 			drawStationAtDate(newTime);
         }
     });
+	
+	$( "#play" ).click(function() {
+	  var tempTime = newTime;
+	  var check = function(){
+		if(tempTime.getHours() != fin.getHours() || tempTime.getDate() != fin.getDate()){
+			tempTime.setHours(newTime.getHours() + 1);
+			drawStationAtDate(tempTime);
+			$("#slider").slider('value',tempTime);
+			$("#slider").slider('disable');
+			$('#value').html(tempTime.getDate() + "/" + tempTime.getMonth()+1 + " - "  + displayHour(tempTime));
+			setTimeout(check, 200); // check again in a second
+		}
+		else{
+			$("#slider").slider('enable')
+		}
+	  }
+	 check();
+	});
 });
     </script>
 
@@ -42,10 +56,11 @@ $(function() {
 <div id="mapSide">
 <div style="height:40px;">
 	<div id="slider" style="width:200px;margin-left:20px;margin-top:20px;float:left;"></div>
-	<div id="value" style="margin-top:20px;float:left;margin-left:20px;"></div>
+	<div id="value" style="width:100px;margin-top:20px;float:left;margin-left:20px;"></div>
+	<div style="margin-top:18px;float:left;margin-left:20px;"> <button id="play">Play</button> </div>
 </div>
 
-	<!--<button id="slider" onclick="drawStationAtDate()">Click me !</button>-->
+
 <div id="legende"></div>
 	
 </div>

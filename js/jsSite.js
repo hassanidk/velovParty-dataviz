@@ -798,7 +798,7 @@
         });
     }
          
-    var slider = document.getElementById("slider")
+    var slider = document.getElementById("divSlider")
     var playButton = document.getElementById("playButton")
     // From Google API Documentation
     function CenterControl(controlDiv, map) {
@@ -868,13 +868,13 @@ function mapSlider(){
  
 
             var tauxRemplissage = records[i].etat[indexSlide][key]  
-            console.log("I = " + i)
-            console.log(key)
-            console.log(tauxRemplissage)
+ 
             if (i <  83){
-                console.log("ok")
-                console.log(tauxRemplissage)
-                if (tauxRemplissage == 0) {
+
+                if (tauxRemplissage == null){
+                    url = "img/velo0.png"
+                }
+                else if (tauxRemplissage == 0) {
                     url = "img/velo0.png"
                 } else if (tauxRemplissage < 15) {
                     url = "img/velo10.png"
@@ -896,12 +896,15 @@ function mapSlider(){
                     url = "img/velo90.png"
                 } else if (tauxRemplissage == 100) {
                     url = "img/velo100.png"
-                }else{
+                }else {
                     url = "img/veloO.png"
+                
                 }
             }else{
-
-                         if (tauxRemplissage<5) {
+                if (tauxRemplissage ==null){
+                    url = "img/parking0.png"
+                }
+                else if (tauxRemplissage<5) {
                 url="img/parking0.png"
         
             }
@@ -944,10 +947,10 @@ function mapSlider(){
             else if (tauxRemplissage == 100) {
                 url="img/parking100.png"
             
-            }  else{
+            }else{
                 url = "img/parking0.png"
             }
-            
+
             }
             allMarkers[i].setIcon(url)
             

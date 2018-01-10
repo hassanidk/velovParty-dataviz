@@ -189,8 +189,6 @@ var IDS = [];
         allMarkers.push(marker)
         };
     });
-
-
     
   d3.json("https://data.rennesmetropole.fr/api/records/1.0/search/?rows=100&dataset=etat-des-stations-le-velo-star-en-temps-reel&facet=nom&facet=etat&facet=nombreemplacementsactuels&facet=nombreemplacementsdisponibles&facet=nombrevelosdisponibles", function(json){
 // Methode Google MAP
@@ -291,6 +289,7 @@ google.maps.event.addDomListener(window, "load", function () {
 			//d3.selectAll("svg").remove();
 			correspTable = [];
 			d3.selectAll("path.line").remove();
+			drawLegende(IDS, colors)
 
 			
 			}
@@ -338,7 +337,21 @@ function getStation(stationID, records) {
   });
   return station;
 }
-    
+ 
+function getIndexofStation(stationID, records) {
+  var station = {};
+  var index, temp = 0;
+  
+  records.forEach(function(d) {
+     if(d.station_id == stationID){
+       station = d;
+	   index = temp;
+     }
+	 temp += 1;
+  });
+  return index;
+}
+ 
 function createClearValues(states,modifs){
   var values = [];
   for (var index in states) {        	
@@ -395,7 +408,7 @@ function getData(stationID, records, color){
     }
   	var values = createClearValues(temp,0);
     correspTable.push({
-				key : stationID,
+		key : stationID,
         nom : station.nom,
         color : color
       });
@@ -429,10 +442,15 @@ function getLinkedData(stationID, records, color){
 function drawStation(stationID, color){
 	d3.json("data/allHistoric.json", function(error, data) {
 	  	if (error) throw error;
-    	data.records[stationID].etat = createClearValues(data.records[stationID].etat,0)
-      for (var index in data.records[stationID].etat) {
-        var same = data.records[stationID].etat[index][0].getTime() === d.getTime();
-        var date1 = data.records[stationID].etat[index][0];
+		console.log(getStation(stationID,data.records));
+		//console.log(data.records);
+		console.log(data.records[getIndexofStation(stationID, data.records)].etat);
+		
+		var state = data.records[getIndexofStation(stationID, data.records)].etat;
+    	state = createClearValues(state,0)
+      for (var index in state) {
+        var same = state[index][0].getTime() === d.getTime();
+        var date1 = state[index][0];
         var date2 = d;
         if(date1.getHours() === date2.getHours()){
           if(date1.getDate() === date2.getDate()){
@@ -442,7 +460,7 @@ function drawStation(stationID, color){
       }
       //console.log(data.records[stationID].etat)
 			
-      var clearValues = getData(stationID,data.records,color);
+        var clearValues = getData(stationID,data.records,color);
     	var clearPredictValues = getPredictData(stationID,data.records,color);
     	var clearLinkedValues = getLinkedData(stationID,data.records,color);
     
@@ -459,7 +477,7 @@ function drawStation(stationID, color){
     		})
         .on("mouseout", function(d, i) {
       		 d3.select(this).style("opacity", 0.8)
-           tooltip.style("opacity", 0);
+           //tooltip.style("opacity", 0);
         });
     
       g.selectAll("line").data([clearPredictValues]).enter().append("path")
@@ -503,10 +521,24 @@ function drawStation(stationID, color){
 				//value += "<div style=\"color:" + colors[id] + ";\">" + "blabla" + "</div>";
             	value += "<div style=\"color:" + colors[id] + ";\">" + correspTable[id].nom + " : "+temp[index][1] + "</div>";
           }
-		  value += "";
+		  //value += "";
 		  document.getElementById("legende").innerHTML = value;
 
     	}
+
     });  
+	
+	function drawLegende(IDS, colors){
+	  var value = ""; // = "Heure : " + index + ":00" + "<br><br>";
+	  for(var id in IDS){
+		var temp = getData(IDS[id], data.records, colors[id])
+		//console.log(temp);
+		//console.log(xCoordinate);
+			//value += "<div style=\"color:" + colors[id] + ";\">" + "blabla" + "</div>";
+			value += "<div style=\"color:" + colors[id] + ";\">" + correspTable[id].nom + "</div>";
+	  }
+	  document.getElementById("legende").innerHTML = value;
+	  console.log(value);
+	}
 }
 </script>

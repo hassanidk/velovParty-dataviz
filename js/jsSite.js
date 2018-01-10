@@ -166,50 +166,38 @@
             var free=json.records[i].fields.free
             var maxi=json.records[i].fields.max
             var remplissage=(maxi-free)/maxi
-            console.log(remplissage)
             if (remplissage<0.05) {
                 icon_park="img/parking0.png"
-                console.log("0")
             }
             else if (remplissage<0.15) {
                 icon_park="img/parking10.png"
-                console.log("1")
             }
             else if (remplissage<0.25) {
                 icon_park="img/parking20.png"
-                console.log("2")
             }
             else if (remplissage<0.35) {
                 icon_park="img/parking30.png"
-                console.log("3")
             }
             else if (remplissage<0.45) {
                 icon_park="img/parking40.png"
-                console.log("4")
             }
             else if (remplissage<0.55) {
                 icon_park="img/parking50.png"
-                console.log("5")
             }
             else if (remplissage<0.65) {
                 icon_park="img/parking60.png"
-                console.log("6")
             }
             else if (remplissage<0.75) {
                 icon_park="img/parking70.png"
-                console.log("7")
             }
             else if (remplissage<0.85) {
                 icon_park="img/parking80.png"
-                console.log("8")
             }
             else if (remplissage<0.95) {
                 icon_park="img/parking90.png"
-                console.log("9")
             }
             else {
                 icon_park="img/parking100.png"
-                console.log("10")
             }
             var marker = new google.maps.Marker({
                 position: {

@@ -43,7 +43,7 @@
     var onlyHour = d3.timeFormat("%H");
 
     //PARAMETRES A CHANGER POUR FAIRE VARIER !
-    var d = new Date("Thu Jan 02 2018 03:00:00 GMT+0100");
+    var d = new Date("Thu Jan 02 2018 01:00:00 GMT+0100");
     //IDS = [1,2,3,4,5];
 
     // Split the dateTime
@@ -152,28 +152,87 @@
         boundariesPath.setMap(map);
     });
 
+
     // Iteration through the parking file
     loadParks()
     function loadParks(){
         d3.json("https://data.rennesmetropole.fr/api/records/1.0/search/?dataset=export-api-parking-citedia", function(json) {
 
-            for (var i = 0; json.records.length; i++) {
-                var coordonnees = json.records[i].fields.geo;
-                var marker = new google.maps.Marker({
-                    position: {
-                        lat: coordonnees[0],
-                        lng: coordonnees[1]
-                    },
-                    store_id: 100 + i,
-                    icon: 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png',
-                    title: json.records[i].fields.key,
-                    map: map
-                });
 
-                allMarkers.push(marker)
-            };
-        });
-    }
+        for (var i = 0; json.records.length; i++) {
+            var coordonnees = json.records[i].fields.geo;
+            var content = "<strong> Nom parking : </strong>" + json.records[i].fields.key + "<br /><strong>Places disponibles : </strong>" + json.records[i].fields.free
+            var icon_park=""
+            var free=json.records[i].fields.free
+            var maxi=json.records[i].fields.max
+            var remplissage=(maxi-free)/maxi
+            console.log(remplissage)
+            if (remplissage<0.05) {
+                icon_park="img/parking0.png"
+                console.log("0")
+            }
+            else if (remplissage<0.15) {
+                icon_park="img/parking10.png"
+                console.log("1")
+            }
+            else if (remplissage<0.25) {
+                icon_park="img/parking20.png"
+                console.log("2")
+            }
+            else if (remplissage<0.35) {
+                icon_park="img/parking30.png"
+                console.log("3")
+            }
+            else if (remplissage<0.45) {
+                icon_park="img/parking40.png"
+                console.log("4")
+            }
+            else if (remplissage<0.55) {
+                icon_park="img/parking50.png"
+                console.log("5")
+            }
+            else if (remplissage<0.65) {
+                icon_park="img/parking60.png"
+                console.log("6")
+            }
+            else if (remplissage<0.75) {
+                icon_park="img/parking70.png"
+                console.log("7")
+            }
+            else if (remplissage<0.85) {
+                icon_park="img/parking80.png"
+                console.log("8")
+            }
+            else if (remplissage<0.95) {
+                icon_park="img/parking90.png"
+                console.log("9")
+            }
+            else {
+                icon_park="img/parking100.png"
+                console.log("10")
+            }
+            var marker = new google.maps.Marker({
+                position: {
+                    lat: coordonnees[0],
+                    lng: coordonnees[1]
+                },
+                id: 100 + i,
+                icon: icon_park,
+                title: json.records[i].fields.key,
+                map: map
+            });
+            var infoWindows = new google.maps.InfoWindow()
+                // StackOverFlow
+            google.maps.event.addListener(marker, 'click', (function(marker, content, infoWindows) {
+                return function() {
+                    infoWindows.setContent(content);
+                    infoWindows.open(map, marker);
+                };
+            })(marker, content, infoWindows));
+            allMarkers.push(marker)
+        };
+    });
+        }
     loadVelo()
     function loadVelo(){
         d3.json("https://data.rennesmetropole.fr/api/records/1.0/search/?rows=100&dataset=etat-des-stations-le-velo-star-en-temps-reel&facet=nom&facet=etat&facet=nombreemplacementsactuels&facet=nombreemplacementsdisponibles&facet=nombrevelosdisponibles", function(json) {
@@ -185,33 +244,44 @@
                     lng: records[i].geometry.coordinates[0]
                 };
                 allLatLng.push(myLatLng)
-
-                var content = "<strong> Nom station : </strong>" + records[i].fields.nom + "<br /><strong>Vélos disponibles : </strong>" + records[i].fields.nombrevelosdisponibles + "<br /><strong>Emplacements disponibles : </strong>" + records[i].fields.nombreemplacementsdisponibles
-                var url = ""
-                if (records[i].fields.etat == "En Panne") {
-                    url = "img/poi-chantier.png"
+            var content = "<strong> Nom station : </strong>" + records[i].fields.nom + "<br /><strong>Vélos disponibles : </strong>" + records[i].fields.nombrevelosdisponibles + "<br /><strong>Emplacements disponibles : </strong>" + records[i].fields.nombreemplacementsdisponibles
+            var url = ""
+            if (records[i].fields.etat == "En Panne") {
+                url = "img/poi-chantier.png"
+            } else {
+                var tauxRemplissage = records[i].fields.nombrevelosdisponibles / records[i].fields.nombreemplacementsactuels 
+                if (tauxRemplissage == 0) {
+                    url = "img/velo0.png"
+                } else if (tauxRemplissage < 0.15) {
+                    url = "img/velo10.png"
+                } else if (tauxRemplissage < 0.25) {
+                    url = "img/velo20.png"
+                } else if (tauxRemplissage < 0.35) {
+                    url = "img/velo30.png"
+                } else if (tauxRemplissage < 0.45) {
+                    url = "img/velo40.png"
+                } else if (tauxRemplissage < 0.55) {
+                    url = "img/velo50.png"
+                } else if (tauxRemplissage < 0.65) {
+                    url = "img/velo60.png"
+                } else if (tauxRemplissage < 0.75) {
+                    url = "img/velo70.png"
+                } else if (tauxRemplissage < 0.85) {
+                    url = "img/velo80.png"
+                } else if (tauxRemplissage < 0.95) {
+                    url = "img/velo90.png"
                 } else {
-                    var tauxRemplissage = records[i].fields.nombrevelosdisponibles / records[i].fields.nombreemplacementsdisponibles
-                    if (tauxRemplissage == 0) {
-                        url = "img/station-0.png"
-                    } else if (tauxRemplissage < 25) {
-                        url = "img/station-25.png"
-                    } else if (tauxRemplissage < 50) {
-                        url = "img/station-50.png"
-                    } else if (tauxRemplissage < 75) {
-                        url = "img/station-75.png"
-                    } else {
-                        url = "img/station-100.png"
-                    }
+                    url = "img/velo100.png"
                 }
-
-                var marker = new google.maps.Marker({
-                    id: records[i].fields.idstation,
-                    position: myLatLng,
-                    map: map,
-                    title: records[i].fields.nom,
-                    icon: url
-                });
+            }
+            // source marker : https://www.iconfinder.com/
+            var marker = new google.maps.Marker({
+                id: records[i].fields.idstation,
+                position: myLatLng,
+                map: map,
+                title: records[i].fields.nom,
+                icon: url
+            });
 
 
                 var infoWindows = new google.maps.InfoWindow()
@@ -261,7 +331,7 @@
                         // Enjoy (ET supprime ces commentaires après ;))
 
                         IDS.push(allMarkers[i].id);
-
+						console.log(allMarkers[i].id);
                     }
                 }
                 for (var i in IDS) {
@@ -309,11 +379,12 @@
     }
 
     svg.append("g")
+		.attr("class", "xaxis")
         .attr("transform", "translate(50," + (height + 50) + ")")
         .call(d3.axisBottom(x) /*.tickFormat(d3.timeFormat("%d-%H:%M"))*/ );
 
-
     svg.append("g")
+		.attr("class", "yaxis")
         .attr("transform", "translate(50," + 50 + ")")
         .call(d3.axisLeft(y));
 
@@ -372,6 +443,9 @@
                 }
                 if (modifs == 2 && index == 1) {
                     t.setDate(d + 1)
+					if (t.getHours() == 23) {
+                        t.setDate(d)
+                    }
                 }
 
                 var newtime = new Date(t);
@@ -425,12 +499,63 @@
         temp[0] = station.etat[curseur - 1];
         temp[1] = station.etat[curseur - 24];
         var values = createClearValues(temp, 2);
+		console.log(values);
         return values;
     }
+	
+	function drawStationAtDate(){
+		//var tempDate = d;
+		//d.setHours(tempDate.getHours()+1);
+		
+		d = new Date("Thu Jan 03 2018 01:00:00 GMT+0100");
+		d3.selectAll("path.line").remove();
+		d3.selectAll("g.xaxis").remove();
+		
+		
+		hours = d.getHours();
+		centralHour = hours;
+		minhour = new Date(d);
+		maxhour = new Date(d);
+
+		minhour.setHours(centralHour - 12);
+		maxhour.setHours(centralHour + 12);
+		
+		x = d3.scaleTime()
+			.range([0, width])
+			.domain([minhour, maxhour]);
+		
+		svg.append("g")
+		.attr("class", "xaxis")
+        .attr("transform", "translate(50," + (height + 50) + ")")
+        .call(d3.axisBottom(x));
+		
+		xa = d3.scaleTime()
+        .range([x2(0), x2(12)])
+        .domain([minhour, d]);
+
+        xb = d3.scaleTime()
+        .range([x2(12), x2(24)])
+        .domain([d, maxhour]);
+
+        xc = d3.scaleTime()
+        .range([0, width])
+        .domain([minhour, maxhour]);
+/*
+		svg.append("g")
+			.attr("class", "yaxis")
+			.attr("transform", "translate(50," + 50 + ")")
+			.call(d3.axisLeft(y));*/
+			
+		console.log(d);
+		for (var i in IDS) {
+			drawStation(IDS[i], colors[i]);
+		}
+	}
 
     function drawStation(stationID, color) {
         d3.json("data/allHistoric.json", function(error, data) {
             if (error) throw error;
+			console.log(stationID);
             console.log(getStation(stationID, data.records));
             //console.log(data.records);
             console.log(data.records[getIndexofStation(stationID, data.records)].etat);
@@ -503,11 +628,12 @@
 				var xCoordinate = d3.event.pageX;
 				var yCoordinate = d3.event.pageY;
 				//legende.style("opacity", .9);
-					var index = Math.floor(x3(xCoordinate-882));
+					var index = Math.floor(x3(xCoordinate-1193));
 				  var value = ""; // = "Heure : " + index + ":00" + "<br><br>";
 				  for(var id in IDS){
 					var temp;
-
+									  console.log(index);
+				  console.log(xCoordinate);
 						//value += "<div style=\"color:" + colors[id] + ";\">" + "blabla" + "</div>";
 					if(type == 0){
 						temp = getData(IDS[id],data.records, colors[id])
@@ -523,6 +649,7 @@
 					}
 				  }
 				  //value += "";
+
 				  document.getElementById("legende").innerHTML = value;
 
 				}

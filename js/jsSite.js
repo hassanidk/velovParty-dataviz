@@ -24,7 +24,8 @@
     var rectangle = null;
     var IDS = [];
     var modeVisu = 0
-
+    var setIDS = new Set();
+    var indexSlide = 0
 
     // Create SVG
     var svg = d3.select("#mapSide").append("svg")
@@ -166,50 +167,50 @@
             var free=json.records[i].fields.free
             var maxi=json.records[i].fields.max
             var remplissage=(maxi-free)/maxi
-            console.log(remplissage)
+            
             if (remplissage<0.05) {
                 icon_park="img/parking0.png"
-                console.log("0")
+        
             }
             else if (remplissage<0.15) {
                 icon_park="img/parking10.png"
-                console.log("1")
+        
             }
             else if (remplissage<0.25) {
                 icon_park="img/parking20.png"
-                console.log("2")
+       
             }
             else if (remplissage<0.35) {
                 icon_park="img/parking30.png"
-                console.log("3")
+           
             }
             else if (remplissage<0.45) {
                 icon_park="img/parking40.png"
-                console.log("4")
+       
             }
             else if (remplissage<0.55) {
                 icon_park="img/parking50.png"
-                console.log("5")
+    
             }
             else if (remplissage<0.65) {
                 icon_park="img/parking60.png"
-                console.log("6")
+ 
             }
             else if (remplissage<0.75) {
                 icon_park="img/parking70.png"
-                console.log("7")
+        
             }
             else if (remplissage<0.85) {
                 icon_park="img/parking80.png"
-                console.log("8")
+            
             }
             else if (remplissage<0.95) {
                 icon_park="img/parking90.png"
-                console.log("9")
+         
             }
             else {
                 icon_park="img/parking100.png"
-                console.log("10")
+            
             }
             var marker = new google.maps.Marker({
                 position: {
@@ -324,10 +325,14 @@
 
                 for (var i = 0; i < allMarkers.length; i++) {
                     if (bounds.contains(allMarkers[i].getPosition())) {
-                        IDS.push(allMarkers[i].id);
+
+                        //IDS.push(allMarkers[i].id);
+                        setIDS.add(allMarkers[i].id);
 						//console.log(allMarkers[i].id);
                     }
                 }
+                for (let item of setIDS) IDS.push(item);
+                console.log(IDS)
                 for (var i in IDS) {
                     drawStation(IDS[i], colors[i]);
                 }
@@ -356,6 +361,102 @@
             }
         });
     });
+
+    function setVelo(){
+        d3.json("https://data.rennesmetropole.fr/api/records/1.0/search/?rows=100&dataset=etat-des-stations-le-velo-star-en-temps-reel&facet=nom&facet=etat&facet=nombreemplacementsactuels&facet=nombreemplacementsdisponibles&facet=nombrevelosdisponibles", function(json) {
+            var records = json.records;
+            for (var i = 0; i < records.length; i++) {
+            if (records[i].fields.etat == "En Panne") {
+                url = "img/poi-chantier.png"
+            } else {
+                var tauxRemplissage = records[i].fields.nombrevelosdisponibles / records[i].fields.nombreemplacementsactuels 
+                if (tauxRemplissage == 0) {
+                    url = "img/velo0.png"
+                } else if (tauxRemplissage < 0.15) {
+                    url = "img/velo10.png"
+                } else if (tauxRemplissage < 0.25) {
+                    url = "img/velo20.png"
+                } else if (tauxRemplissage < 0.35) {
+                    url = "img/velo30.png"
+                } else if (tauxRemplissage < 0.45) {
+                    url = "img/velo40.png"
+                } else if (tauxRemplissage < 0.55) {
+                    url = "img/velo50.png"
+                } else if (tauxRemplissage < 0.65) {
+                    url = "img/velo60.png"
+                } else if (tauxRemplissage < 0.75) {
+                    url = "img/velo70.png"
+                } else if (tauxRemplissage < 0.85) {
+                    url = "img/velo80.png"
+                } else if (tauxRemplissage < 0.95) {
+                    url = "img/velo90.png"
+                } else {
+                    url = "img/velo100.png"
+                }
+            }
+            allMarkers[i].setIcon(url)
+            }
+        });
+    }
+
+    function setParks(){
+         d3.json("https://data.rennesmetropole.fr/api/records/1.0/search/?dataset=export-api-parking-citedia", function(json) {
+
+
+        for (var i = 0; json.records.length; i++) {
+            var icon_park=""
+            var free=json.records[i].fields.free
+            var maxi=json.records[i].fields.max
+            var remplissage=(maxi-free)/maxi
+            
+            if (remplissage<0.05) {
+                icon_park="img/parking0.png"
+        
+            }
+            else if (remplissage<0.15) {
+                icon_park="img/parking10.png"
+        
+            }
+            else if (remplissage<0.25) {
+                icon_park="img/parking20.png"
+       
+            }
+            else if (remplissage<0.35) {
+                icon_park="img/parking30.png"
+           
+            }
+            else if (remplissage<0.45) {
+                icon_park="img/parking40.png"
+       
+            }
+            else if (remplissage<0.55) {
+                icon_park="img/parking50.png"
+    
+            }
+            else if (remplissage<0.65) {
+                icon_park="img/parking60.png"
+ 
+            }
+            else if (remplissage<0.75) {
+                icon_park="img/parking70.png"
+        
+            }
+            else if (remplissage<0.85) {
+                icon_park="img/parking80.png"
+            
+            }
+            else if (remplissage<0.95) {
+                icon_park="img/parking90.png"
+         
+            }
+            else {
+                icon_park="img/parking100.png"
+            
+            }
+            allMarkers[i+83].setIcon(icon_park)
+        }
+    });
+     }
     function boundariesRennes(data) {
         var resultArray = [];
         for (var i = 0; i < data.length; i++) {
@@ -541,13 +642,14 @@
 			.attr("transform", "translate(50," + 50 + ")")
 			.call(d3.axisLeft(y));*/
 			
-		console.log(d);
+
 		for (var i in IDS) {
 			drawStation(IDS[i], colors[i]);
 		}
 		drawLegende();
 	}
-	
+
+
 	function drawLegende(){
 		//console.log(correspTable[1]);
 		var value = "";
@@ -676,6 +778,8 @@
         }
     }
          
+    var slider = document.getElementById("slider")
+    var playButton = document.getElementById("playButton")
     // From Google API Documentation
     function CenterControl(controlDiv, map) {
 
@@ -707,68 +811,121 @@
         controlUI.addEventListener('click', mapSlider)
       }
 
+function setMapOnAll(map) {
+  for (var i = 0; i < allMarkers.length; i++) {
+    allMarkers[i].setMap(map);
+  }
+}
 
+function majSlideBar(i){
+    indexSlide = i
+    modeVisu = 0
+    console.log(indexSlide)
+    console.log(modeVisu)
+    mapSlider()
+}
 function mapSlider(){
-   console.log(allMarkers.length)
-   for (var i = 0; i<allMarkers.length; i++){
-    allMarkers[i].setMap(null)
-   }
+
     if (modeVisu == 0){
         controlText.innerHTML = 'Mode temps réel'
         modeVisu = 1
-    allKeys = []
+        slider.style.visibility ="visible"
+        playButton.style.visibility = "visible"
    // On supprime les marqueurs d'abord
 
-   console.log(allMarkers)
     d3.json("data/allHistoric.json", function(json) {
         // Methode Google MAP
         var records = json.records
 
-        var timeValue = records[82].etat;
-        for (var i = 0; i<timeValue.length; i++){
-            var keys = timeValue[i];
-            for (key in keys){
-                allKeys.push(key)
-            }
-        }
-
         for (var i = 0; i < records.length; i++) {
-            var myLatLng = {
-                lat: allLatLng[i].lat, 
-                lng: allLatLng[i].lng
+            var timeValue = records[i].etat;
+            for (nomDate in timeValue[i]){
+                var key = nomDate
             }
+       
 
-            
-            var tauxRemplissage = records[i].etat[19][allKeys[19]]  
-            
-            if (tauxRemplissage == 0) {
-                url = "img/station-0.png"
-            } else if (tauxRemplissage < 25) {
-                url = "img/station-25.png"
-            } else if (tauxRemplissage < 50) {
-                url = "img/station-50.png"
-            } else if (tauxRemplissage < 75) {
-                url = "img/station-75.png"
-            } else {
-                url = "img/station-100.png"
+            var tauxRemplissage = records[i].etat[indexSlide][key]  
+            if (i <  83){
+                if (tauxRemplissage == 0) {
+                    url = "img/velo0.png"
+                } else if (tauxRemplissage < 15) {
+                    url = "img/velo10.png"
+                } else if (tauxRemplissage < 25) {
+                    url = "img/velo20.png"
+                } else if (tauxRemplissage < 35) {
+                    url = "img/velo30.png"
+                } else if (tauxRemplissage < 45) {
+                    url = "img/velo40.png"
+                } else if (tauxRemplissage < 55) {
+                    url = "img/velo50.png"
+                } else if (tauxRemplissage < 65) {
+                    url = "img/velo60.png"
+                } else if (tauxRemplissage < 75) {
+                    url = "img/velo70.png"
+                } else if (tauxRemplissage < 85) {
+                    url = "img/velo80.png"
+                } else if (tauxRemplissage < 95) {
+                    url = "img/velo90.png"
+                } else {
+                    url = "img/velo100.png"
+                }
+            }else{
+                         if (remplissage<0.05) {
+                icon_park="img/parking0.png"
+        
             }
+            else if (tauxRemplissage<0.15) {
+                icon_park="img/parking10.png"
+        
+            }
+            else if (tauxRemplissage<0.25) {
+                icon_park="img/parking20.png"
+       
+            }
+            else if (tauxRemplissage<0.35) {
+                icon_park="img/parking30.png"
+           
+            }
+            else if (remplissage<0.45) {
+                icon_park="img/parking40.png"
+       
+            }
+            else if (remplissage<0.55) {
+                icon_park="img/parking50.png"
+    
+            }
+            else if (remplissage<0.65) {
+                icon_park="img/parking60.png"
+ 
+            }
+            else if (remplissage<0.75) {
+                icon_park="img/parking70.png"
+        
+            }
+            else if (remplissage<0.85) {
+                icon_park="img/parking80.png"
             
-
-            var marker = new google.maps.Marker({
-                id: records[i].station_id,
-                position: myLatLng,
-                map: map,
-                title: records[i].nom,
-                icon: url
-            }); 
-
-            allMarkers.push(marker)
+            }
+            else if (remplissage<0.95) {
+                icon_park="img/parking90.png"
+         
+            }
+            else {
+                icon_park="img/parking100.png"
+            
+            }  
+            }
+            allMarkers[i].setIcon(url)
+            
         }
-    });
+      
+    }); 
         }else{
         controlText.innerHTML = 'Mode slider'
+        slider.style.visibility = "hidden"
+        playButton.style.visibility = "hidden"
         modeVisu = 0
-        loadParks()
-        loadVelo()
+        setParks()
+        setVelo()
     }
 }

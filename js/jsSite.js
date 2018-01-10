@@ -190,7 +190,7 @@
                     lat: coordonnees[0],
                     lng: coordonnees[1]
                 },
-                store_id: 100 + i,
+                id: 100 + i,
                 icon: icon_park,
                 title: json.records[i].fields.key,
                 map: map
@@ -283,7 +283,7 @@
                         // Enjoy (ET supprime ces commentaires après ;))
 
                         IDS.push(allMarkers[i].id);
-
+						console.log(allMarkers[i].id);
                     }
                 }
                 for (var i in IDS) {
@@ -397,6 +397,9 @@
                 }
                 if (modifs == 2 && index == 1) {
                     t.setDate(d + 1)
+					if (t.getHours() == 23) {
+                        t.setDate(d)
+                    }
                 }
 
                 var newtime = new Date(t);
@@ -450,16 +453,19 @@
         temp[0] = station.etat[curseur - 1];
         temp[1] = station.etat[curseur - 24];
         var values = createClearValues(temp, 2);
+		console.log(values);
         return values;
     }
 	
 	function drawStationAtDate(){
-		console.log("test");
-		var tempDate = d;
+		//var tempDate = d;
+		//d.setHours(tempDate.getHours()+1);
+		
+		d = new Date("Thu Jan 03 2018 01:00:00 GMT+0100");
 		d3.selectAll("path.line").remove();
 		d3.selectAll("g.xaxis").remove();
 		
-		d.setHours(tempDate.getHours()+1);
+		
 		hours = d.getHours();
 		centralHour = hours;
 		minhour = new Date(d);
@@ -503,6 +509,7 @@
     function drawStation(stationID, color) {
         d3.json("data/allHistoric.json", function(error, data) {
             if (error) throw error;
+			console.log(stationID);
             console.log(getStation(stationID, data.records));
             //console.log(data.records);
             console.log(data.records[getIndexofStation(stationID, data.records)].etat);
@@ -575,11 +582,12 @@
 				var xCoordinate = d3.event.pageX;
 				var yCoordinate = d3.event.pageY;
 				//legende.style("opacity", .9);
-					var index = Math.floor(x3(xCoordinate-882));
+					var index = Math.floor(x3(xCoordinate-1193));
 				  var value = ""; // = "Heure : " + index + ":00" + "<br><br>";
 				  for(var id in IDS){
 					var temp;
-
+									  console.log(index);
+				  console.log(xCoordinate);
 						//value += "<div style=\"color:" + colors[id] + ";\">" + "blabla" + "</div>";
 					if(type == 0){
 						temp = getData(IDS[id],data.records, colors[id])
@@ -595,6 +603,7 @@
 					}
 				  }
 				  //value += "";
+
 				  document.getElementById("legende").innerHTML = value;
 
 				}

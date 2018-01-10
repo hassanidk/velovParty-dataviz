@@ -859,18 +859,21 @@ function mapSlider(){
         // Methode Google MAP
         var records = json.records
         console.log(records.length)
-        for (var i = 0; i < records.length; i++) {
-            var timeValue = records[i].etat;
-            for (nomDate in timeValue[i]){
+                   var timeValue = records[indexSlide].etat;
+            for (nomDate in timeValue[indexSlide]){
                 var key = nomDate
             }
          
+        for (var i = 0; i < records.length; i++) {
+ 
 
             var tauxRemplissage = records[i].etat[indexSlide][key]  
-            if (i == 0){
-                console.log(tauxRemplissage)
-            }
+            console.log("I = " + i)
+            console.log(key)
+            console.log(tauxRemplissage)
             if (i <  83){
+                console.log("ok")
+                console.log(tauxRemplissage)
                 if (tauxRemplissage == 0) {
                     url = "img/velo0.png"
                 } else if (tauxRemplissage < 15) {
@@ -891,54 +894,60 @@ function mapSlider(){
                     url = "img/velo80.png"
                 } else if (tauxRemplissage < 95) {
                     url = "img/velo90.png"
-                } else {
+                } else if (tauxRemplissage == 100) {
                     url = "img/velo100.png"
+                }else{
+                    url = "img/veloO.png"
                 }
             }else{
+
                          if (tauxRemplissage<5) {
-                icon_park="img/parking0.png"
+                url="img/parking0.png"
         
             }
             else if (tauxRemplissage<15) {
-                icon_park="img/parking10.png"
+                url="img/parking10.png"
         
             }
             else if (tauxRemplissage<25) {
-                icon_park="img/parking20.png"
+                url="img/parking20.png"
        
             }
             else if (tauxRemplissage<35) {
-                icon_park="img/parking30.png"
+                url="img/parking30.png"
            
             }
             else if (tauxRemplissage<45) {
-                icon_park="img/parking40.png"
+                url="img/parking40.png"
        
             }
             else if (tauxRemplissage<55) {
-                icon_park="img/parking50.png"
+                url="img/parking50.png"
     
             }
             else if (tauxRemplissage<65) {
-                icon_park="img/parking60.png"
+                url="img/parking60.png"
  
             }
             else if (tauxRemplissage<75) {
-                icon_park="img/parking70.png"
+                url="img/parking70.png"
         
             }
             else if (tauxRemplissage<85) {
-                icon_park="img/parking80.png"
+                url="img/parking80.png"
             
             }
             else if (tauxRemplissage<95) {
-                icon_park="img/parking90.png"
+                url="img/parking90.png"
          
             }
-            else {
-                icon_park="img/parking100.png"
+            else if (tauxRemplissage == 100) {
+                url="img/parking100.png"
             
-            }  
+            }  else{
+                url = "img/parking0.png"
+            }
+            
             }
             allMarkers[i].setIcon(url)
             

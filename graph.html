@@ -29,9 +29,9 @@ $(function() {
 			index = (ui.value - debut.getTime()) / 3600000;
 
             $('#value').html(newTime.getDate() + "/" + newTime.getMonth()+1 + " - " + displayHour(newTime));
-			//drawStationAtDate(newTime);
-			//majSlideBar(index)
-			console.log(index)
+			drawStationAtDate(newTime);
+			majSlideBar(index)
+		
         }
     });
 	

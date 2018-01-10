@@ -5,15 +5,50 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <link href="css/cssPerso.css" rel="stylesheet">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://maps.google.com/maps/api/js?key=AIzaSyCpIkmOcSjVyT8EoDR5m6mTVUAA-s3yHio&sensor=true"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpIkmOcSjVyT8EoDR5m6mTVUAA-s3yHio&v=3.exp&sensor=false&libraries=drawing"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+$(function() {
+	var debut = new Date("Thu Jan 02 2018 01:00:00 GMT+0100")
+	var fin = new Date("Thu Jan 05 2018 01:00:00 GMT+0100")
+    $("#slider").slider({
+        range: false,
+        min: debut.getTime(),
+        max: fin.getTime(),
+        step: 3600000,
+        slide: function(e, ui) {
+            /*var hours = Math.floor(ui.value / 60);
+            var minutes = ui.value - (hours * 60);
+
+            if(hours.toString().length == 1) hours = '0' + hours;
+            if(minutes.toString().length == 1) minutes = '0' + minutes;*/
+			var newTime = new Date(ui.value);
+			var hour = newTime.getHours();
+			var date = newTime.getDate();
+			var displayHour = d3.timeFormat("%d/%m - %H:%M");
+			var index = (ui.value - debut.getTime()) / 3600000;
+            $('#value').html(displayHour(newTime));
+			drawStationAtDate(newTime);
+        }
+    });
+});
+    </script>
 
 </head>
 
 <div id="mapCanvas"></div>
 <div id="mapSide">
-	<button id="slider" onclick="drawStationAtDate()">Click me</button>
-    <div id="legende"></div>
+<div style="height:40px;">
+	<div id="slider" style="width:200px;margin-left:20px;margin-top:20px;float:left;"></div>
+	<div id="value" style="margin-top:20px;float:left;margin-left:20px;"></div>
+</div>
+
+	<!--<button id="slider" onclick="drawStationAtDate()">Click me !</button>-->
+<div id="legende"></div>
+	
 </div>
 
 <script src="js/jsSite.js"></script>

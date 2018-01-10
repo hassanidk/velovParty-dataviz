@@ -10,7 +10,7 @@
 
     //------
     var svg = d3.select("#mapSide").append("svg")
-        .attr("width", 960)
+        .attr("width", 750)
         .attr("height", 450);
 
     var width = 600;
@@ -372,7 +372,7 @@
             var creneau = states[index];
             for (var hour in creneau) {
                 var temp = [];
-                var time = index + ":00";
+                var time;
 
                 var t = new Date(hour);
                 var h = t.getHours();
@@ -457,11 +457,13 @@
         return values;
     }
 	
-	function drawStationAtDate(){
+	function drawStationAtDate(time){
 		//var tempDate = d;
 		//d.setHours(tempDate.getHours()+1);
 		
-		d = new Date("Thu Jan 03 2018 01:00:00 GMT+0100");
+		//d = new Date("Thu Jan 03 2018 01:00:00 GMT+0100");
+		console.log(time)
+		d = new Date(time);
 		d3.selectAll("path.line").remove();
 		d3.selectAll("g.xaxis").remove();
 		

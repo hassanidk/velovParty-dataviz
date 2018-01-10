@@ -26,7 +26,10 @@ Pour profiter au mieux d'une des fonctionnalitès sur le graph qui utilise les c
 
 ## Built With
 
-D3.js
+D3.js (Visualisation)
+Javascript (Fonctions)
+JQuery (Slide Bar)
+Python (Scripts)
 
 ## Auteurs
 * **BRAGE Anthony**

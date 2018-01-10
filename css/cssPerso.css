@@ -19,6 +19,13 @@ html, body{
  #legende{
      position: relative;
      height:100px;
+     float: left;
+}
+ #legendePark{
+     position: relative;
+     height:100px;
+     float: left;
+     margin-left: 20px;
 }
  .line {
      fill: none;

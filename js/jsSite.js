@@ -35,7 +35,7 @@
 
     var width = 600;
     var height = 350;
-    var colors = ["blue", "red", "green", "yellow", "brown", "purple", "grey", "pink"]
+    var colors = ["blue", "red", "green", "brown", "purple", "grey", "pink"]
     var curseur = 0;
     var shift = 200;
 
@@ -241,8 +241,8 @@
         }
     loadVelo()
     function loadVelo(){
-        d3.json("data/veloLocal.json", function(json){
-        //d3.json("https://data.rennesmetropole.fr/api/records/1.0/search/?rows=100&dataset=etat-des-stations-le-velo-star-en-temps-reel&facet=nom&facet=etat&facet=nombreemplacementsactuels&facet=nombreemplacementsdisponibles&facet=nombrevelosdisponibles", function(json) {
+        //d3.json("data/veloLocal.json", function(json){
+        d3.json("https://data.rennesmetropole.fr/api/records/1.0/search/?rows=100&dataset=etat-des-stations-le-velo-star-en-temps-reel&facet=nom&facet=etat&facet=nombreemplacementsactuels&facet=nombreemplacementsdisponibles&facet=nombrevelosdisponibles", function(json) {
             // Methode Google MAP
             var records = json.records;
             for (var i = 0; i < records.length; i++) {
@@ -369,8 +369,8 @@
     });
 
     function setVelo(){
-        d3.json("data/veloLocal.json", function(json){
-        //d3.json("https://data.rennesmetropole.fr/api/records/1.0/search/?rows=100&dataset=etat-des-stations-le-velo-star-en-temps-reel&facet=nom&facet=etat&facet=nombreemplacementsactuels&facet=nombreemplacementsdisponibles&facet=nombrevelosdisponibles", function(json) {
+        //d3.json("data/veloLocal.json", function(json){
+        d3.json("https://data.rennesmetropole.fr/api/records/1.0/search/?rows=100&dataset=etat-des-stations-le-velo-star-en-temps-reel&facet=nom&facet=etat&facet=nombreemplacementsactuels&facet=nombreemplacementsdisponibles&facet=nombrevelosdisponibles", function(json) {
             var records = json.records;
             for (var i = 0; i < records.length; i++) {
             if (records[i].fields.etat == "En Panne") {
@@ -868,10 +868,9 @@ function mapSlider(){
  
 
             var tauxRemplissage = records[i].etat[indexSlide][key]  
- 
+			console.log(tauxRemplissage);
             if (i <  83){
-
-                if (tauxRemplissage == null){
+                if (tauxRemplissage == null || tauxRemplissage == undefined){
                     url = "img/velo0.png"
                 }
                 else if (tauxRemplissage == 0) {
@@ -897,11 +896,11 @@ function mapSlider(){
                 } else if (tauxRemplissage == 100) {
                     url = "img/velo100.png"
                 }else {
-                    url = "img/veloO.png"
+                    url = "img/velo0.png"
                 
                 }
             }else{
-                if (tauxRemplissage ==null){
+                if (tauxRemplissage ==null || tauxRemplissage == undefined){
                     url = "img/parking0.png"
                 }
                 else if (tauxRemplissage<5) {

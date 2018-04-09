@@ -2,8 +2,6 @@
 
 Projet réalisé dans le cadre de l'UE "Data Visualization" du Master Informationique de Lyon 1
 ## Guide de démarrage 
-Pour utiliser notre application il suffit de se rendre sur le site ci-dessous :
-https://hassanidk.github.io/velovParty-dataviz/
 L'application possède 2 fonctionnalitès majeures:
 
 La première consiste à une visualisation en temps réel des places de parking et de vélos de la ville de Rennes
